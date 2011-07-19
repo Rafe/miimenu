@@ -1,7 +1,7 @@
 <h1>Welcome to wiimenu!!</h1>
 <div>
   <% if user_signed_in? %>
-    Hi <%= current_user_email %>
+    Hi <%= current_user.email %>
     <%= link_to("Sign out",destroy_user_session_path) %>
   <% else %>
     <%= link_to "Sign in",new_user_session_path %>

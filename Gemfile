@@ -41,10 +41,6 @@ gem "kaminari"
 # File Uploads
 gem 'paperclip'
 
-
-#faker to make fake seed data
-gem 'faker', '0.3.1'
-
 #user authurize
 gem 'devise', '>= 1.4.2'
 
@@ -52,6 +48,7 @@ group :test, :development do
   gem "rspec", "~> 2.0"
   gem "rspec-rails", "~> 2.0"
   gem "factory_girl_rails"
+  gem "database_cleaner"
   gem "shoulda-matchers"
   gem "rcov"
   gem "delorean"
@@ -60,6 +57,7 @@ group :test, :development do
   gem "watchr"
   gem "jasmine", '1.1.0.rc3'
   gem "headless"
+  gem 'faker', '0.3.1'
   # gem "capybara"
   # gem 'yard'
   # gem "bluecloth"
