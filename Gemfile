@@ -46,7 +46,7 @@ gem 'paperclip'
 gem 'faker', '0.3.1'
 
 #user authurize
-gem 'devise', '~> 1.1.7'
+gem 'devise', '>= 1.4.2'
 
 group :test, :development do
   gem "rspec", "~> 2.0"
@@ -58,7 +58,7 @@ group :test, :development do
   gem "autotest"
   gem "annotate"
   gem "watchr"
-  gem "jasmine"
+  gem "jasmine", '1.1.0.rc3'
   gem "headless"
   # gem "capybara"
   # gem 'yard'
