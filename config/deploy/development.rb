@@ -18,7 +18,7 @@ set :use_sudo, false
 set :user, "apps"
 set :group, "apps"
 
-default_environment["PATH"] = "usr/local/bin:usr/bin"
+default_environment["PATH"] = "/usr/local/bin:/usr/bin:/bin"
 
 namespace :deploy do
   desc "restart"
