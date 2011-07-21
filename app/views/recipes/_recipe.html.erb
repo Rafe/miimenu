@@ -1,0 +1,12 @@
+<div>
+  <h2><%= recipe.name %></h2>
+  <ul>
+    <% if recipe.image? %>
+      <li><%= image_tag(recipe.image.url(:medium)) %></li>
+    <% end %>
+    <li><%= recipe.name %></li>
+    <li><%= recipe.description %></li>
+    <li><%= recipe.instructions %></li>
+    <li><%= recipe.ingredients %></li>
+  </ul>
+</div>

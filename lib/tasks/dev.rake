@@ -21,6 +21,21 @@ namespace :dev do
                    :password => password,
                    :password_confirmation => password)
     end
+
+
+    20.times do |id|
+      name = "Test Dish"
+      instructions = "1.cook 2.cook 3.cook"
+      description = "some good dish"
+      ingredients = "good things X 3"
+      user = User.find(id+1)
+      user.recipes.create(
+        :name => name,
+        :description => description,
+        :ingredients => ingredients,
+        :instructions => instructions
+      )
+    end
   end
   
   desc "Run watchr"
