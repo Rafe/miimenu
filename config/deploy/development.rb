@@ -1,6 +1,6 @@
 set :application, "miimenu"
 set :domain, "miimenu.com"
-set :repository, "get@github.com:Rafe/miimenu.git"
+set :repository, "git@github.com:Rafe/miimenu.git"
 set :deploy_to, "/home/apps/miimenu"
 
 role :app, domain
