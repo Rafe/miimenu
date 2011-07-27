@@ -5,6 +5,8 @@ namespace :dev do
   
   desc "Generate fake data"
   task :fake => :environment do
+    Rake::Task["db:reset"].invoke
+
     User.create!(
       :name => "Jimmy Chao",
       :email => "daizenga@gmail.com",
@@ -27,13 +29,23 @@ namespace :dev do
       name = "Test Dish"
       instructions = "1.cook 2.cook 3.cook"
       description = "some good dish"
-      ingredients = "good things X 3"
+      tags = "chinese spicy healthy"
       user = User.find(id+1)
-      user.recipes.create(
+      recipe = user.recipes.create(
         :name => name,
         :description => description,
-        :ingredients => ingredients,
-        :instructions => instructions
+        :instructions => instructions,
+        :tags => tags
+      )
+      recipe.ingredients.create(
+        :name => "test",
+        :quantity => 1.5, 
+        :unit => "tea spoon"
+      )
+      recipe.ingredients.create(
+        :name => "test2",
+        :quantity => 100, 
+        :unit => "gram"
       )
     end
   end

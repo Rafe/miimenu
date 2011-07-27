@@ -5,8 +5,21 @@
       <li><%= image_tag(recipe.image.url(:medium)) %></li>
     <% end %>
     <li><%= recipe.name %></li>
+    <li>
+      <ul>
+        <% recipe.tags.split(" ").each do |tag| %>
+          <li><%= tag %></li>
+        <% end %>  
+      </ul>
+    </li>
     <li><%= recipe.description %></li>
     <li><%= recipe.instructions %></li>
-    <li><%= recipe.ingredients %></li>
+    <li>
+      <ul>
+        <% recipe.ingredients.each do |i| %>
+          <li><%= i.name %> <%= i.quantity %> <%= i.unit %></li>
+        <% end %>  
+      </ul>
+    </li>
   </ul>
 </div>

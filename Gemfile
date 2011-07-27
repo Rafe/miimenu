@@ -55,7 +55,7 @@ group :test, :development do
   gem "rcov"
   gem "delorean"
   gem "autotest"
-  gem "annotate"
+  gem "annotate", :git => "https://github.com/ctran/annotate_models.git"
   gem "watchr"
   gem "jasmine", '1.1.0.rc3'
   gem "headless"
