@@ -22,4 +22,21 @@
       </ul>
     </li>
   </ul>
+  <button>Like</button>
+  <% unless current_user.entries.include?(recipe) %> 
+    <%= form_for current_user.menus.build(:recipe_id => recipe.id) do |m| %>
+      <%= m.hidden_field :recipe_id %>
+      <%= m.submit "cook" %>
+    <% end %>
+  <% else %>
+    Cooked in 
+    <%= time_ago_in_words(current_user.menus.find_by_recipe_id(recipe).created_at) %><br />
+  <% end %>
+  Jimmy Chao and 32 people like this , Alan Chao and 12 people cook this<br />
+
+  Good meal!<br />
+  =img= I like this!<br />
+  Cool!<br />
+  soso<br />
+  
 </div>

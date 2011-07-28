@@ -12,6 +12,10 @@ Wiimenu::Application.routes.draw do
     resources :recipes
   end
 
+  resources :menus, :only => [:index,:create,:destory] do
+    get "shopping"
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,7 +1,15 @@
 <div>
+  <div style="float:left;width:300px;">
+    <%= render current_user.entries %>
+  </div>
 
-<%= paginate @recipes %>
+  <div style="float:right;width:1000px;">
+  
+    <%= paginate @recipes %>
 
-<%= render @recipes %>
+    <%= render @recipes %>
+  </div>
+
+  <div style="clear:both;"/>
 
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110727192123) do
+ActiveRecord::Schema.define(:version => 20110728201906) do
 
   create_table "ingredients", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(:version => 20110727192123) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "menus", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "menus", ["user_id", "recipe_id"], :name => "index_menus_on_user_id_and_recipe_id"
 
   create_table "recipes", :force => true do |t|
     t.string   "name"
@@ -31,8 +40,15 @@ ActiveRecord::Schema.define(:version => 20110727192123) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "user_id"
+    t.integer  "author_id"
     t.string   "tags"
+  end
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

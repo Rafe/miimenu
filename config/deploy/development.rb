@@ -27,9 +27,12 @@ namespace :deploy do
   end
 end
 
+
 desc "Create database.yml and asset package for production"
 after("deploy:update_code") do
   db_config = "#{shared_path}/config/database.yml.local"
   run "cp #{db_config} #{release_path}/config/database.yml"
 end
+
+
 

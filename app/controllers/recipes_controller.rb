@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.page(params[:page]).per(10)
+    #@recipes = current_user.feed.page(params[:page]).per(10)
   end
 
   def show
