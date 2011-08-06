@@ -20,8 +20,8 @@ describe User do
   end
 
   it "should require a name" do
-    no_email_user = User.new(@attr.merge(:name => ""))
-    no_email_user.should_not be_valid
+    no_name_user = User.new(@attr.merge(:name => ""))
+    no_name_user.should_not be_valid
   end
 
   it "should accept valid email address" do
@@ -86,6 +86,33 @@ describe User do
 
       it "should set the encrypted password attribute" do
         @user.encrypted_password.should_not be_blank
+      end
+    end
+  end
+
+  describe "follow relationship" do
+    before :each do
+      @user = User.create(@attr)
+    end
+
+    it "should be able to get all following" do
+      @user.should respond_to(:following)
+    end
+
+    it "should have respond to follow!" do
+      @user.should respond_to(:follow!)
+    end
+
+    describe "follow!" do
+      before :each do
+        @user2 = User.create(:name =>"tester",
+                             :email=>"some@company.com",
+                             :password=>"abcdef")
+      end
+
+      it "should be able to create relationship with followed user" do
+        @user.follow! @user2
+        @user.following.should include(@user2)
       end
     end
   end

@@ -14,8 +14,10 @@ gem 'coffee-script'
 gem 'uglifier'
 
 # compass for css
-gem 'compass', ">= 0.11.5"
+gem 'compass', :git => 'https://github.com/chriseppstein/compass.git',
+               :branch => 'rails31'
 gem 'sass'
+gem 'html5-boilerplate'
 
 gem 'jquery-rails'
 
