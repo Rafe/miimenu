@@ -1,13 +1,16 @@
 <header>
   <div class="content">
     <h1 class="logo"><%= link_to "Miimenu",root_path%></h1>    
+    <div class="jewel">
+      [Cmt][Rcp][Fow]
+    </div>
     <form class="search-form">
       <input type="text" placeholder="Search" class="search-bar"></input>
     </form>
     <% if user_signed_in? %>
       <%= render :partial => "users/user", :locals => {:user =>current_user} %>
     <% end %>
-    <nav> <%= link_to "Home", root_path %> | Profile </nav>
+    <nav> <%= link_to "Home", root_path %> | Tw | Fb | G+ </nav>
   </div>
 </header>
 

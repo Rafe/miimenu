@@ -2,13 +2,14 @@
 
 <div class="menu">
   <select>
-    <option>today</option>
-    <option>tai</option>
-    <option>mom</option>
+    <option>To make (5)</option>
+    <option>Japanese (50)</option>
+    <option>Pasta (100)</option>
   </select>
   <%= render :partial => "entry", :collection => current_user.entries %>
 </div>
 
 <div class="recipes">
+  <%= link_to "<= back to recipes" , root_path %>
   <%= render @recipe %>
 </div>

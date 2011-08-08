@@ -11,6 +11,10 @@
 </div>
 
 <div class="recipes">
+  <div class="recipe-type"> 
+    <a href="?tab=news" title="Recipes from your friends and people you followed">News</a>|
+    <a href="?tab=interesting" title="Recipes that you interested with">Interesting</a>|
+    Hot | Week | Summer </div>
   <%= render :partial => "feed", :collection => @recipes %>
 
   <%= paginate @recipes %>

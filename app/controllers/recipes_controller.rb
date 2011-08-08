@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if params[:type] == "all"
+    if params[:tab] == "interesting"
       @recipes = Recipe.page(params[:page]).per(10)
     else
       @recipes = current_user.feed.page(params[:page]).per(10)

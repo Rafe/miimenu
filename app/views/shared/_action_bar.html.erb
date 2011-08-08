@@ -1,4 +1,15 @@
 <div class="actions clearfix">
-  <button class="menu-button">MENU</button>
-  <%= button_to "POST", new_recipe_path ,:method =>:get %>
+  <div>
+    <button class="menu-button">Menu</button>
+  </div>
+  <div style="padding-right:100px;">
+    <button class="menu-button">Shopping List</button>
+  </div>
+  <%= button_to "Post", new_recipe_path ,:method =>:get %>
+  <div>
+    <%= button_to "Tags", users_path ,:method =>:get %>
+  </div>
+  <div>
+  <%= button_to "Users", users_path ,:method =>:get %>
+  </div>
 </div>

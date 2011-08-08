@@ -1,6 +1,6 @@
 $(()->
   $(".menu-button").click (e)->
-    $(".menu").toggle('slow')
+    $(".menu").toggle()
 
   $("#add-ingredients").click ()->
     id = $('.ingredient').length - 1
