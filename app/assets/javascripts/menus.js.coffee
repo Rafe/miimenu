@@ -1,3 +1,18 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$(()->
+  $(".menu-button").click (e)->
+    $(".menu").toggle('slow')
+
+  $("#add-ingredients").click ()->
+    id = $('.ingredient').length - 1
+    $(".edit-ingredients").append("
+      <div class='ingredient'>
+        <input id='recipe_ingredients_attributes_#{id}_name' name='recipe[ingredients_attributes][#{id}][name]' size='30' type='text'> 
+        <input id='recipe_ingredients_attributes_#{id}_quantity' name='recipe[ingredients_attributes][#{id}][quantity]' size='30' type='text'>
+        <a class='delete-ingredient'>[delete]</a>
+      </div>
+    ")
+
+  $(".delete-ingredient").live("click",(e)->
+    $(e.target).parent().remove()
+  )
+)

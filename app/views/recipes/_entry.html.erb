@@ -1,0 +1,19 @@
+<div class="entry clearfix">
+  <% if entry.image? %>
+    <%= link_to image_tag(entry.image.url(:thumb)), recipe_path(entry) %>
+  <% end %>
+  <div class="content">
+    <h4><%= link_to entry.name , recipe_path(entry) %></h4>
+    <p>
+    <%= entry.description %>
+    </p>
+    <p>
+    <% unless entry.ingredients.nil? %>
+      <% entry.ingredients.each do |i| %>
+        <%= i.name %>
+      <% end %>
+    <% end %>
+    </p>
+    <%= button_to "delete",{:controller =>"menus", :action => :destroy, :id => entry.id},:method => :delete %>
+  </div>
+</div>

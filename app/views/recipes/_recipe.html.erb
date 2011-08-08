@@ -1,42 +1,25 @@
-<div>
-  <h2><%= recipe.name %></h2>
-  <ul>
-    <% if recipe.image? %>
-      <li><%= image_tag(recipe.image.url(:medium)) %></li>
-    <% end %>
-    <li><%= recipe.name %></li>
-    <li>
-      <ul>
-        <% recipe.tags.split(" ").each do |tag| %>
-          <li><%= tag %></li>
-        <% end %>  
-      </ul>
-    </li>
-    <li><%= recipe.description %></li>
-    <li><%= recipe.instructions %></li>
-    <li>
-      <ul>
-        <% recipe.ingredients.each do |i| %>
-          <li><%= i.name %> <%= i.quantity %> <%= i.unit %></li>
-        <% end %>  
-      </ul>
-    </li>
-  </ul>
-  <button>Like</button>
-  <% unless current_user.entries.include?(recipe) %> 
-    <%= form_for current_user.menus.build(:recipe_id => recipe.id) do |m| %>
-      <%= m.hidden_field :recipe_id %>
-      <%= m.submit "cook" %>
-    <% end %>
-  <% else %>
-    Cooked in 
-    <%= time_ago_in_words(current_user.menus.find_by_recipe_id(recipe).created_at) %><br />
-  <% end %>
-  Jimmy Chao and 32 people like this , Alan Chao and 12 people cook this<br />
+<div class="recipe">
+  <div class="content">
+    <div class="main-photo">
+      <% if recipe.image? %>
+        <div><%= image_tag(recipe.image.url(:medium),:witdh => 300) %></div>
+      <% end %>
+    </div>
+    <div class="description clearfix">
+      <h2><%= recipe.name %></h2>
+        <p><%= recipe.description %></p>
+        <ul>
+          <% recipe.ingredients.each do |i| %>
+            <li><%= i.name %> <%= i.quantity %></li>
+          <% end %>  
+        </ul>
+        <%= render :partial => "users/author", :object => recipe.author %>
+        <%= time_ago_in_words(recipe.created_at) %>ago<br />
+      </div>
+    <div class="clearfix"/>
+    </div>
+    <div class="instructions clearfix">
+      <%= raw to_html(recipe.instructions) %>
+    </div>
+  </div>
 
-  Good meal!<br />
-  =img= I like this!<br />
-  Cool!<br />
-  soso<br />
-  
-</div>

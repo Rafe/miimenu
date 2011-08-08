@@ -1,15 +1,17 @@
-<div>
-  <div style="float:left;width:300px;">
-    <%= render current_user.entries %>
-  </div>
 
-  <div style="float:right;width:1000px;">
-  
-    <%= paginate @recipes %>
+<%= render "shared/action_bar" %>
 
-    <%= render @recipes %>
-  </div>
+<div class="menu">
+  <select>
+    <option>today</option>
+    <option>tai</option>
+    <option>mom</option>
+  </select>
+  <%= render :partial => "entry", :collection => current_user.entries %>
+</div>
 
-  <div style="clear:both;"/>
+<div class="recipes">
+  <%= render :partial => "feed", :collection => @recipes %>
 
+  <%= paginate @recipes %>
 </div>

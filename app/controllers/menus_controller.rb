@@ -1,19 +1,15 @@
 class MenusController < ApplicationController
 
-  def index 
-    render current_user.entries
-  end
-
   def create 
-    entry = Recipe.find(params[:menu][:recipe_id])
-    unless entry.nil?
-      current_user.menus.create(:recipe => entry)
+    id = params[:menu][:recipe_id]
+    unless id.nil?
+      current_user.menus.create(:recipe_id => id)
     end
     redirect_to recipes_path
   end
 
-  def shopping
-    @recipes = current_user.entries
-    render 
+  def destroy
+    current_user.menus.find_by_recipe_id(params[:id]).destroy
+    redirect_to recipes_path
   end
 end

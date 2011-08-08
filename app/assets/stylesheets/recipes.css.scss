@@ -1,8 +1,73 @@
-// Place all the styles related to the recipes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.menu{
+  float:left;
+  width:190px;
+  padding:14px;
+  margin-right:20px;
+  background: white;
+  border-radius: 10px;
+}
+.recipes{
+  float:left;
+  width:740px;
+  padding:10px;
+  background: white;
+  border-radius: 10px;
+}
 
-body.recipes {
-  // Add the recipes class to your body tag
-  // Then, place scoped styles here.
+.entry{
+  h4 a{
+    color:green;
+  }
+  img{
+    float:left;
+  }
+  .content{
+    float:left;
+    padding:3px;
+  }
+}
+
+.feed{
+  padding:10px;
+  border-bottom:1px green solid;
+  h3 a{
+    color:green;
+  }
+
+  .main-photo{
+    float:left;
+    padding-right:5px;
+    margin-right:10px;
+  }
+}
+
+.recipe{
+  padding:5px;
+  .main-photo{
+    padding:5px;
+    float:left;
+    border:1px green solid;
+    border-radius:10px;
+  }
+  .description{
+    padding:5px;
+    width:400px;
+    float:left;
+  }
+  ul.ingredients li{
+    list-style-type: none;
+    display:block;
+  }
+  ol li{
+    border-bottom:1px green solid;
+    font-size:20px;
+    margin:5px;
+    padding:5px;
+    list-style: decimal inside;
+  }
+  ul li{
+    padding:5px;
+    margin:5px;
+  }
+  p{padding:5px;}
 }

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :menus 
   has_many :entries, :through => :menus, :source => :recipe
+  has_many :recipes, :foreign_key => "author_id"
   has_many :actions 
 
   has_many :relationships, :foreign_key => "follower_id",
@@ -38,5 +39,25 @@ class User < ActiveRecord::Base
   def unfollow!(followed)
     relationships.find_by_followed_id(followed).destroy
   end
-
 end
+# == Schema Information
+#
+# Table name: users
+#
+#  id                   :integer(4)      not null, primary key
+#  email                :string(255)     default(""), not null
+#  encrypted_password   :string(128)     default(""), not null
+#  password_salt        :string(255)     default(""), not null
+#  reset_password_token :string(255)
+#  remember_token       :string(255)
+#  remember_created_at  :datetime
+#  sign_in_count        :integer(4)      default(0)
+#  current_sign_in_at   :datetime
+#  last_sign_in_at      :datetime
+#  current_sign_in_ip   :string(255)
+#  last_sign_in_ip      :string(255)
+#  created_at           :datetime
+#  updated_at           :datetime
+#  name                 :string(255)
+#
+

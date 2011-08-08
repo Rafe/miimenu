@@ -6,17 +6,25 @@
   <%= f.label :tags %><br />
   <%= f.text_field :tags %>
 </div>
+<div class="field edit-ingredients">
+  <%= f.label :ingredients %><br />
+  <%= f.fields_for :ingredients do |i| %>
+  <div class="ingredient">
+    <%= i.text_field :name %>
+    <%= i.text_field :quantity %>
+    <a class="delete-ingredient">[delete]</a>
+    <br />
+  </div>
+  <% end %>
+</div>
+<h5><a id="add-ingredients">+ Add Ingredients </a></h5>
 <div class="field">
   <%= f.label :description %><br />
-  <%= f.text_area :description , :size => "40x20" %>
-</div>
-<div class="field">
-  <%= f.label :ingredients %><br />
-  <%= f.text_area :ingredients , :size => "40x20" %>
+  <%= f.text_area :description , :size => "100x15" %>
 </div>
 <div class="field">
   <%= f.label :instructions %><br />
-  <%= f.text_area :instructions , :size => "40x20" %>
+  <%= f.text_area :instructions , :size => "100x15" %>
 </div>
 <div class="field">
   <%= f.label :upload_image %><br />

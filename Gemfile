@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc4'
+gem 'rails', '3.1.0.rc5'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -47,6 +47,8 @@ gem 'paperclip'
 
 #user authurize
 gem 'devise', '>= 1.4.2'
+
+gem 'maruku'
 
 group :test, :development do
   gem "rspec", "~> 2.0"

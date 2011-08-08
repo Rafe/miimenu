@@ -8,3 +8,4 @@ config/database.yml
 Thumbs.db
 coverage/
 .DS_Store
+public/system

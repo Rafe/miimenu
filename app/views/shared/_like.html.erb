@@ -1,0 +1,6 @@
+<% unless current_user.entries.include?(feed) %>
+  <%= form_for current_user.menus.build(:recipe_id => feed.id) do |f| %>
+    <div><%= f.hidden_field :recipe_id %></div>
+    <div class="actions"><%= f.submit "like" %></div>
+  <% end %>
+<% end %>

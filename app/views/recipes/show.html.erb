@@ -1,1 +1,14 @@
-<%= render @recipe %>
+<%= render "shared/action_bar" %>
+
+<div class="menu">
+  <select>
+    <option>today</option>
+    <option>tai</option>
+    <option>mom</option>
+  </select>
+  <%= render :partial => "entry", :collection => current_user.entries %>
+</div>
+
+<div class="recipes">
+  <%= render @recipe %>
+</div>

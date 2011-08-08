@@ -1,8 +1,9 @@
 class Recipe < ActiveRecord::Base
 
   belongs_to :author, :class_name => "User"
-  has_many :ingredients
 
+  has_many :ingredients
+  accepts_nested_attributes_for :ingredients
   has_many :menus 
   has_many :cooks, :through => :menus, :source => :user
 
@@ -22,3 +23,21 @@ class Recipe < ActiveRecord::Base
           { :user_id => user })
   end
 end
+# == Schema Information
+#
+# Table name: recipes
+#
+#  id                 :integer(4)      not null, primary key
+#  name               :string(255)
+#  description        :text
+#  instructions       :text
+#  created_at         :datetime
+#  updated_at         :datetime
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :integer(4)
+#  image_updated_at   :datetime
+#  author_id          :integer(4)
+#  tags               :string(255)
+#
+

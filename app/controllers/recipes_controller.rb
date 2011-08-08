@@ -1,10 +1,13 @@
 class RecipesController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index,:show]
+  before_filter :authenticate_user!
 
   def index
-    @recipes = Recipe.page(params[:page]).per(10)
-    #@recipes = current_user.feed.page(params[:page]).per(10)
+    if params[:type] == "all"
+      @recipes = Recipe.page(params[:page]).per(10)
+    else
+      @recipes = current_user.feed.page(params[:page]).per(10)
+    end
   end
 
   def show
@@ -13,10 +16,11 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = current_user.recipes.new
+    @recipe.ingredients.new
   end
 
   def create
-    @recipe = current_user.recipes.build(params[:recipe])
+    @recipe = current_user.recipes.new(params[:recipe])
     if @recipe.save
       redirect_to @recipe
     else

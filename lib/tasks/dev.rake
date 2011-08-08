@@ -27,7 +27,7 @@ namespace :dev do
 
     20.times do |id|
       name = "Test Dish"
-      instructions = "1.cook 2.cook 3.cook"
+      instructions = "1.cook  2.cook  3.cook"
       description = "some good dish"
       tags = "chinese spicy healthy"
       user = User.find(id+1)
@@ -39,13 +39,11 @@ namespace :dev do
       )
       recipe.ingredients.create(
         :name => "test",
-        :quantity => 1.5, 
-        :unit => "tea spoon"
+        :quantity => "1.5 tea spoon" 
       )
       recipe.ingredients.create(
         :name => "test2",
-        :quantity => 100, 
-        :unit => "gram"
+        :quantity => "100 gram", 
       )
     end
   end

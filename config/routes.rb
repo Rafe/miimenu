@@ -1,8 +1,8 @@
 Wiimenu::Application.routes.draw do
 
-  root :to => "pages#index"
-
   devise_for :users
+
+  root :to => "recipes#index"
 
   resources :users, :only => [:index,:show]
 
@@ -12,9 +12,7 @@ Wiimenu::Application.routes.draw do
     resources :recipes
   end
 
-  resources :menus, :only => [:index,:create,:destory] do
-    get "shopping"
-  end
+  resources :menus, :only => [:create,:destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

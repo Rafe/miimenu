@@ -1,0 +1,21 @@
+<div class="feed clearfix">
+  <div class="main-photo">
+    <% if feed.image? %>
+      <div><%= link_to image_tag(feed.image.url(:medium),:size => "200x160") ,
+        recipe_path(feed) %></div>
+    <% end %>
+  </div>
+  <h3><%= link_to feed.name, recipe_path(feed) %></h3>
+    <p><%= feed.description %></p>
+    <div><%= raw to_html(feed.instructions) %></div>
+    <div>
+      <% feed.ingredients.each do |i| %>
+        <span><%= i.name %> <%= i.quantity %></span>,
+      <% end %>  
+    </div>
+    <%= render :partial => "/users/author" , :object => feed.author %>
+    <%= time_ago_in_words(feed.created_at) %> ago<br />
+    <%= render :partial => "shared/like" , :locals => {
+      :feed => feed
+    }%>
+</div>

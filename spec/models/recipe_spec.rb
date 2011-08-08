@@ -17,7 +17,7 @@ end
 #  image_content_type :string(255)
 #  image_file_size    :integer(4)
 #  image_updated_at   :datetime
-#  user_id            :integer(4)
+#  author_id          :integer(4)
 #  tags               :string(255)
 #
 
