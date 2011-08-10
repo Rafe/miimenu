@@ -1,3 +1,12 @@
 <div class="user">
   <%= gravatar_for author, :size => 30 %> posted by <%= author.name %>
+  <% unless current_user?(author) %>
+    <div id="user-<%= author.id %>" class="follow-form">
+      <% if current_user.following?(author) %>
+        <%= render "users/unfollow", :user => author %>
+      <% else %>
+        <%= render "users/follow", :user => author %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

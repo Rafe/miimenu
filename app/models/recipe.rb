@@ -4,6 +4,7 @@ class Recipe < ActiveRecord::Base
 
   has_many :ingredients
   accepts_nested_attributes_for :ingredients
+
   has_many :menus 
   has_many :cooks, :through => :menus, :source => :user
 
@@ -16,12 +17,20 @@ class Recipe < ActiveRecord::Base
 
   scope :from_users_followed_by, lambda {|user| followed_by(user)}
 
+  scope :search_for, lambda {|query| search(query) }
+
   def self.followed_by(user)
     following_ids = %(SELECT followed_id FROM relationships 
                       WHERE follower_id = :user_id)
     where("author_id IN (#{following_ids}) OR author_id = :user_id",
           { :user_id => user })
   end
+
+  def self.search(query)
+    condition = %(recipes.name LIKE :query OR ingredients.name LIKE :query)
+    Recipe.joins(:ingredients).where(condition,{:query => "%#{query}%" })
+  end
+
 end
 # == Schema Information
 #

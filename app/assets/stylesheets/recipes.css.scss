@@ -16,12 +16,15 @@
   h4 a{
     color:green;
   }
-  img{
+  .photo{
     float:left;
+    img{width:90px;}
   }
   .content{
     float:left;
-    padding:3px;
+    padding:5px;
+    width:90px;
+    word-wrap:break-word;
   }
 }
 
@@ -52,20 +55,24 @@
     width:400px;
     float:left;
   }
-  ul.ingredients li{
-    list-style-type: none;
+  li{
     display:block;
+    padding:5px;
+    margin:5px;
   }
-  ol li{
-    border-bottom:1px green solid;
+  .instructions{
     font-size:20px;
-    margin:5px;
-    padding:5px;
-    list-style: decimal inside;
-  }
-  ul li{
-    padding:5px;
-    margin:5px;
+    ol li{
+      display:list-item;
+      list-style: decimal inside;
+      border-bottom:1px green solid;
+      margin:5px;
+      padding:5px;
+    }
+    ul li{
+      background:#FFDFFF;
+      border-radius:10px;
+    }
   }
   p{padding:5px;}
 }

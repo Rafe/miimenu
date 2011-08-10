@@ -4,9 +4,9 @@
     <div class="jewel">
       [Cmt][Rcp][Fow]
     </div>
-    <form class="search-form">
-      <input type="text" placeholder="Search" class="search-bar"></input>
-    </form>
+    <%= form_tag(search_recipes_path , :method => "get" , :class => "search-form") do %>
+      <% text_field_tag :q, "",:class => "search-bar" , :placeholder => "Search" %>
+    <% end %>
     <% if user_signed_in? %>
       <%= render :partial => "users/user", :locals => {:user =>current_user} %>
     <% end %>

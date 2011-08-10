@@ -12,4 +12,5 @@ class MenusController < ApplicationController
     current_user.menus.find_by_recipe_id(params[:id]).destroy
     redirect_to recipes_path
   end
+
 end

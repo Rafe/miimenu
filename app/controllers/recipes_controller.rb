@@ -39,4 +39,8 @@ class RecipesController < ApplicationController
   def destroy
     Recipe.find(params[:id]).destroy
   end
+
+  def search
+    @recipes = Recipe.search_for(params[:q]).page(params[:page]).per(10)
+  end
 end

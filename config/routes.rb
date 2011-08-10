@@ -4,15 +4,20 @@ Wiimenu::Application.routes.draw do
 
   root :to => "recipes#index"
 
-  resources :users, :only => [:index,:show]
+  resources :users, :only => [:index, :show]
 
-  resources :recipes
+  resources :recipes do
+    collection do
+      get 'search'
+    end
+  end
 
   resources :users do
     resources :recipes
   end
 
-  resources :menus, :only => [:create,:destroy]
+  resources :menus, :only => [:create, :destroy]
+  resources :relationships, :only => [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
