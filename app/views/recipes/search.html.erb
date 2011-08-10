@@ -1,0 +1,13 @@
+<%= render "shared/action_bar" %>
+
+<%= render "menus/menu" %>
+
+<div class="recipes">
+
+  <div>
+    <h1>Search for : <%= params[:q] %></h1>
+  </div>
+  <%= render :partial => "feed", :collection => @recipes %>
+
+  <%= paginate @recipes %>
+</div>
