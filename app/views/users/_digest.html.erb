@@ -1,0 +1,4 @@
+<div class="user">
+  <%= gravatar_for user, :size => 30 %>
+  <%= link_to("sign out",destroy_user_session_path) if current_user %>
+</div>

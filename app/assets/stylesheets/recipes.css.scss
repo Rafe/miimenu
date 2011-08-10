@@ -13,6 +13,7 @@
 }
 
 .entry{
+  position:relative;
   h4 a{
     color:green;
   }
@@ -25,6 +26,18 @@
     padding:5px;
     width:90px;
     word-wrap:break-word;
+  }
+  .delete-button{
+    position:absolute;
+    right:0;
+    top:0;
+    display:none;
+  }
+  &:hover{
+    background-color:#EEEEEE;
+    .delete-button{
+      display:block;
+    }
   }
 }
 

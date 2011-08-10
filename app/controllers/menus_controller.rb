@@ -5,7 +5,7 @@ class MenusController < ApplicationController
     unless id.nil?
       current_user.menus.create(:recipe_id => id)
     end
-    redirect_to recipes_path
+    redirect_back_or recipes_path
   end
 
   def destroy

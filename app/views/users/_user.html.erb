@@ -1,3 +1,4 @@
 <div class="user">
   <%= gravatar_for user, :size => 30 %>
+  <h3><%= link_to user.name, user_path(user) %>@<%=user.email%></h3>
 </div>
