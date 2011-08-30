@@ -13,6 +13,12 @@ class Recipe < ActiveRecord::Base
     :thumb => "100x100"
   }
 
+  #validation
+  validates_presence_of :name
+  validates_presence_of :description
+  validates_presence_of :instructions
+  validates_presence_of :author_id
+
   default_scope :order => "recipes.created_at DESC"
 
   scope :from_users_followed_by, lambda {|user| followed_by(user)}

@@ -24,7 +24,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to @recipe
     else
-      redirect_to root_path
+      redirect_to new_recipe_path(@recipe.id)
     end
   end
 

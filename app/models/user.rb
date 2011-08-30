@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
+  def to_make
+    entries.where("category = ?","To make")
+  end
+
   def feed
     Recipe.from_users_followed_by(self)
   end

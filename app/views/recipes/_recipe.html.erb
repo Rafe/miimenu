@@ -19,7 +19,7 @@
     <div class="clearfix"/>
     </div>
     <div class="instructions clearfix">
-      <%= raw to_html(recipe.instructions) %>
+      <%= sanitize to_html(recipe.instructions) %>
     </div>
   </div>
 

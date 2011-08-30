@@ -7,8 +7,7 @@ end
 #
 #  id         :integer(4)      not null, primary key
 #  name       :string(255)
-#  unit       :string(255)
-#  quantity   :float
+#  quantity   :string(255)
 #  recipe_id  :integer(4)
 #  created_at :datetime
 #  updated_at :datetime

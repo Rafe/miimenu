@@ -1,6 +1,11 @@
 class Menu < ActiveRecord::Base
+
+  CATEGORY = ['To make','Favorites','Test']
+
   belongs_to :user
   belongs_to :recipe
+
+  validates_inclusion_of :category, :in => CATEGORY 
 
   default_scope :order => "menus.created_at DESC"
 

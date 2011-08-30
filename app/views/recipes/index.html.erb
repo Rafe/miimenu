@@ -2,12 +2,8 @@
 <%= render "shared/action_bar" %>
 
 <div class="menu">
-  <select>
-    <option>today</option>
-    <option>tai</option>
-    <option>mom</option>
-  </select>
-  <%= render :partial => "entry", :collection => current_user.entries %>
+  <%= select_tag(:category, options_for_select(["To make","Favorite","Test"])) %>
+  <%= render :partial => "entry", :collection => current_user.to_make %>
 </div>
 
 <div class="recipes">
