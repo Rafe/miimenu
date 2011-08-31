@@ -9,6 +9,10 @@ class Menu < ActiveRecord::Base
 
   default_scope :order => "menus.created_at DESC"
 
+  def self.categorys 
+    CATEGORY
+  end
+
 end
 # == Schema Information
 #

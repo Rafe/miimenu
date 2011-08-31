@@ -4,9 +4,9 @@ class RecipesController < ApplicationController
 
   def index
     if params[:tab] == "interesting"
-      @recipes = Recipe.page(params[:page]).per(10)
+      @recipes = Recipe.includes(:ingredients).page(params[:page]).per(10)
     else
-      @recipes = current_user.feed.page(params[:page]).per(10)
+      @recipes = current_user.feed.includes(:ingredients).page(params[:page]).per(10)
     end
   end
 
