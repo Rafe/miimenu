@@ -1,7 +1,68 @@
 require 'spec_helper'
 
 describe Recipe do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before :each do
+    @user = Factory(:user)
+    @recipe = Factory(:recipe, :author => @user)
+    @user.menus.create(:recipe_id => @recipe.id)
+  end
+
+  it "should have ingredients" do
+    recipe = @user.recipes.build(:name => "test",
+                                :description => "some",
+                                :instructions => "things")
+    recipe.should_not be_valid
+    recipe.ingredients = [Ingredient.new(:name=>"test",:quantity => "12g")]
+    recipe.should be_valid
+
+  end
+
+  it "should have cooks add it to menu" do
+    @recipe.cooks[0].should == @user
+  end
+
+  describe "followed_by" do
+
+    it "respond to followed" do
+      Recipe.should respond_to(:followed_by)
+    end
+
+    it "should return user followed" do
+      Recipe.followed_by(@user).should include(@recipe)
+    end
+  end
+
+  describe "search" do
+
+    it "respond to search" do
+      Recipe.should respond_to(:search)
+    end
+
+    it "should able to search" do
+      Recipe.search_for("food").should include(@recipe)
+    end
+  end
+
+
+  describe "validation" do
+    before :each do
+      @attr = {
+        :name => "test",
+        :description => "test",
+        :instructions => "test",
+        :ingredients => [Ingredient.new(:name=>"test",:quantity => "12g")]
+      }
+    end
+
+    it "should require author_id" do
+      Recipe.new(@attr).should_not be_valid
+    end
+
+    it "should validate correctly" do
+      @user.recipes.build(@attr).should be_valid
+    end
+  end
+
 end
 # == Schema Information
 #

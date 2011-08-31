@@ -1,4 +1,4 @@
-Wiimenu::Application.routes.draw do
+Miimenu::Application.routes.draw do
 
   devise_for :users
 

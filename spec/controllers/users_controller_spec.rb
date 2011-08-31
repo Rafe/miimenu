@@ -17,7 +17,7 @@ describe UsersController do
 
     it "should be include user name" do
       get :show , :id => @user
-      response.should have_selector("p",:content => @user.name)
+      response.should have_selector("h1",:content => @user.name)
     end
   end
 
@@ -43,11 +43,9 @@ describe UsersController do
       get :index
 
       @users[0..2].each do |user|
-        response.should have_selector("li", :content=> user.name)
+        response.should have_selector("div", :content=> user.name)
       end
     end
-
-
   end
 
 end

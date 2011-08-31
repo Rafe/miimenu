@@ -1,8 +1,8 @@
 .menu{
   float:left;
-  width:190px;
-  padding:14px;
-  margin-right:20px;
+  width:185px;
+  padding:5px;
+  margin-right:15px;
   border-right:1px green solid;
 }
 .recipes{
@@ -13,8 +13,9 @@
 }
 
 .entry{
+  padding:3px;
   position:relative;
-  h4 a{
+  h5 a{
     color:green;
   }
   .photo{
@@ -26,8 +27,7 @@
   }
   .content{
     float:left;
-    padding:5px;
-    width:90px;
+    padding:3px;
     word-wrap:break-word;
   }
   .delete-button{

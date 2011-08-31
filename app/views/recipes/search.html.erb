@@ -5,7 +5,10 @@
 <div class="recipes">
 
   <div>
-    <h1>Search for : <%= params[:q] %></h1>
+    <%= form_tag(search_recipes_path, :method => :get) do %>
+      <%= text_field_tag(:q,params[:q]) %>
+      <%= submit_tag("Search") %>
+    <% end %>
   </div>
   <%= render :partial => "feed", :collection => @recipes %>
 

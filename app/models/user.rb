@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_many :menus 
+  has_many :menus ,:dependent => :destroy
   has_many :entries, :through => :menus, :source => :recipe
   has_many :recipes, :foreign_key => "author_id"
   has_many :actions 

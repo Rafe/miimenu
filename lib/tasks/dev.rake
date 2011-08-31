@@ -27,23 +27,25 @@ namespace :dev do
 
     20.times do |id|
       name = "Test Dish"
-      instructions = "1.cook  2.cook  3.cook"
+      instructions = """
+1. cook  
+2. cook  
+3. cook
+"""
       description = "some good dish"
       tags = "chinese spicy healthy"
       user = User.find(id+1)
+      ingredients = [
+        Ingredient.new(name:"soysauce",quantity:"1.5 tea spoon"),
+        Ingredient.new(name:"pork belle",quantity:"200g")
+      ]
       recipe = user.recipes.create(
         :name => name,
         :description => description,
         :instructions => instructions,
-        :tags => tags
-      )
-      recipe.ingredients.create(
-        :name => "test",
-        :quantity => "1.5 tea spoon" 
-      )
-      recipe.ingredients.create(
-        :name => "test2",
-        :quantity => "100 gram", 
+        :tags => tags,
+        :image => File.open(Dir.glob(File.join(Rails.root,"public/sample.jpg")).sample),
+        :ingredients => ingredients
       )
     end
   end

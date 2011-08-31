@@ -1,5 +1,5 @@
 
-Wii Menu
+Mii Menu
 ================
 
 The social recipe application!!!  

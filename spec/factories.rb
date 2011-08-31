@@ -1,19 +1,18 @@
 require 'factory_girl'
 
-Factory.define :user do |u|
-  u.name "Tester A"
-  u.email "user@example.com"
-  u.password "foobar"
-end
-
 Factory.sequence :email do |n|
   "Person-#{n}@example.com"
 end
 
+Factory.define :user do |u|
+  u.name "Tester A"
+  u.email { Factory.next(:email) }
+  u.password "foobar"
+end
+
 Factory.define :ingredient do |i|
   i.name "food"
-  i.quantity 1.5
-  i.unit "gram"
+  i.quantity "1.5 gram"
 end
 
 Factory.define :recipe do |r|

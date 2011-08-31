@@ -1,7 +1,14 @@
 require 'spec_helper'
 
 describe Ingredient do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before :each do 
+    @ingredient = Ingredient.new(:name => "onion",:quantity =>"200g")
+  end
+
+  it "should hold ingredient's name and quantity" do
+    @ingredient.name.should == "onion"
+    @ingredient.quantity.should == "200g"
+  end
 
 end
 # == Schema Information

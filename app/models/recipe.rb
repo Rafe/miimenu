@@ -17,6 +17,7 @@ class Recipe < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :instructions
+  validates_presence_of :ingredients
   validates_presence_of :author_id
 
   default_scope :order => "recipes.created_at DESC"

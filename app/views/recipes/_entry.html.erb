@@ -1,20 +1,16 @@
 <div class="entry clearfix">
-  <h4><%= link_to entry.name , recipe_path(entry) %></h4>
   <div class="photo">
   <% if entry.image? %>
     <%= link_to image_tag(entry.image.url(:thumb)), recipe_path(entry),
                 :title => entry.description %>
   <% end %>
   </div>
-  <div class="content" >
+  <div class="content">
+    <h5><%= link_to entry.name , recipe_path(entry) %></h5>
     <p>
-      <% unless entry.ingredients.nil? %>
-        <% entry.ingredients.each do |i| %>
-          <%= i.name %>,
-        <% end %>
-      <% end %>
+      <%= entry.description %>
     </p>
-    <%= button_to "delete",{:controller =>"menus", :action => :destroy, :id => entry.id},
-                            :method => :delete ,:class =>"delete-button" %>
   </div>
+  <%= button_to "delete",{:controller =>"menus", :action => :destroy, :id => entry.id},
+                            :method => :delete ,:class =>"delete-button" %>
 </div>

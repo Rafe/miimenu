@@ -3,51 +3,61 @@ require 'spec_helper'
 describe RecipesController do
   render_views
 
+  before do 
+    @user = Factory(:user)
+    @recipe = Factory(:recipe,:author => @user)
+    sign_in @user
+  end
+
   describe "GET 'show'" do
 
-    it "should return single recipe"
+    it "should return single recipe" do
+      Recipe.should_receive(:find).with("123").and_return(@recipe)
 
-    describe "tags" do
-      it "should contains multiple tags"
+      get :show , :id => 123
+      assigns[:recipe] == @recipe
+      response.should be_success
     end
-
   end
 
   describe "GET 'index'" do
 
-    it "should return recipes"
+    it "should return interesting recipes" do
+      @user.stub_chain(:page,:per).and_return([@recipe])
 
+      get :index , :tab => "interesting"
+      assigns[:recipes] == [@recipe]
+      response.should be_success
+    end
+
+    it "should return user's feed" do
+      @user.stub_chain(:feed,:page,:per).and_return([@recipe])
+
+      get :index
+      assigns[:recipes] == [@recipe]
+      response.should be_success
+    end
   end
 
   describe "GET 'new'" do
 
-    it "should be able to edit new recipe"
-
-    it "should have multiple ingredients and count"
-
-    it "should be able to upload image"
-
-    describe "tags" do
-      it "should able to  multiple tags"
+    it "should be able to create new recipe" do
+      @user.stub_chain(:recipes,:new).and_return(@recipe)
+      get :new
+      assigns[:recipe] == @recipe 
+      response.should be_success
     end
-
   end
 
   describe "GET 'edit'" do
 
-    it "should be able to create new recipe"
-
-    it "should be contain title,desc,instructions and ingredients"
-
-    it "should be able to edit recipe"
-
   end
 
   describe "POST 'update'" do
-    it "should be able to update recipe"
+
   end
 
   describe "POST 'destory'" do
-    it "should be able to destory"
+
   end
 end

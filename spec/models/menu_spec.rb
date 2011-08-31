@@ -1,7 +1,21 @@
 require 'spec_helper'
 
 describe Menu do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  before :each do
+    @user = Factory(:user)
+    @recipe = Factory(:recipe, :author_id => @user.id)
+    @menu = Menu.new(:user_id => @user.id,:recipe_id => @recipe.id)
+  end
+    
+  it "should have default category" do
+    @menu.category.should == "To make"
+  end
+
+  it "should not able to set category other than default categorys" do
+    @menu.category = "Some category"
+    @menu.should_not be_valid
+  end
 end
 # == Schema Information
 #
