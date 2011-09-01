@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 describe Recipe do
-  before :each do
+  before do
     @user = Factory(:user)
     @recipe = Factory(:recipe, :author => @user)
-    @user.menus.create(:recipe_id => @recipe.id)
   end
 
   it "should have ingredients" do
@@ -17,9 +16,17 @@ describe Recipe do
 
   end
 
-  it "should have cooks add it to menu" do
-    @recipe.cooks[0].should == @user
+  describe "menu" do
+    before do
+      @menu = @user.menus.create(:name => "To make")
+      @menu.entries.create(:recipe_id => @recipe.id)
+      
+    end
+    it "should show the menus have recipe" do
+      @recipe.menus.should == [@menu]
+    end
   end
+
 
   describe "followed_by" do
 

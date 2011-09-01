@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110830023845) do
+ActiveRecord::Schema.define(:version => 20110831232029) do
+
+  create_table "entries", :force => true do |t|
+    t.integer  "menu_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "entries", ["menu_id"], :name => "index_entries_on_menu_id"
 
   create_table "ingredients", :force => true do |t|
     t.string   "name"
@@ -20,18 +29,22 @@ ActiveRecord::Schema.define(:version => 20110830023845) do
     t.datetime "updated_at"
   end
 
+  add_index "ingredients", ["recipe_id"], :name => "index_ingredients_on_recipe_id"
+
   create_table "menus", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "recipe_id"
+    t.integer  "owner_id"
+    t.string   "name",       :default => "To make"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "category",   :default => "To make"
   end
 
-  add_index "menus", ["user_id", "recipe_id"], :name => "index_menus_on_user_id_and_recipe_id"
+  add_index "menus", ["name"], :name => "index_menus_on_name"
+  add_index "menus", ["owner_id"], :name => "index_menus_on_owner_id"
 
   create_table "recipes", :force => true do |t|
     t.string   "name"
+    t.integer  "author_id"
+    t.string   "tags"
     t.text     "description"
     t.text     "instructions"
     t.datetime "created_at"
@@ -40,8 +53,6 @@ ActiveRecord::Schema.define(:version => 20110830023845) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "author_id"
-    t.string   "tags"
   end
 
   create_table "relationships", :force => true do |t|
@@ -51,10 +62,11 @@ ActiveRecord::Schema.define(:version => 20110830023845) do
     t.datetime "updated_at"
   end
 
+  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
+
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -63,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20110830023845) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"

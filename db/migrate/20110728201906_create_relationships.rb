@@ -6,7 +6,7 @@ class CreateRelationships < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_index :menus, [:user_id,:recipe_id]
+    
+    add_index :relationships, :follower_id
   end
 end

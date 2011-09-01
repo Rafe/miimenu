@@ -17,6 +17,7 @@ Miimenu::Application.routes.draw do
   end
 
   resources :menus, :only => [:create, :destroy]
+  resources :entries, :only => [:create, :destroy]
   resources :relationships, :only => [:create, :destroy]
 
   # The priority is based upon order of creation:

@@ -5,8 +5,8 @@ class Recipe < ActiveRecord::Base
   has_many :ingredients
   accepts_nested_attributes_for :ingredients
 
-  has_many :menus 
-  has_many :cooks, :through => :menus, :source => :user
+  has_many :entries
+  has_many :menus ,:through => :entries
 
   has_attached_file :image, :styles => { 
     :medium => "300x300",

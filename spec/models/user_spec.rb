@@ -46,6 +46,14 @@ describe User do
     user_with_duplicate_email.should_not be_valid
   end
 
+  describe "menu_names" do
+    it "should return menu names that user have" do
+      user = Factory(:user)
+      menu = user.menus.create()
+      user.menu_names.should == [menu.name]
+    end
+  end
+
   describe "passwords" do
 
     before :each do
@@ -86,6 +94,32 @@ describe User do
 
       it "should set the encrypted password attribute" do
         @user.encrypted_password.should_not be_blank
+      end
+    end
+  end
+
+
+  describe "add recipe to menu" do 
+    before do
+      @user = Factory(:user)
+      @recipe = Factory(:recipe, :author_id => @user.id)
+    end
+
+    it "should add to entries" do
+      lambda do
+        @user.like!(@recipe)
+      end.should change(Entry,:count).by(1)
+    end
+
+    it "can add to 'To make' menu by default" do
+      @user.like!(@recipe)
+      @user.menus.find_by_name("To make").recipes == [@recipe]
+    end
+
+    describe "to_make" do 
+      it "should return all entries in to make menu" do
+        @user.like!(@recipe)
+        @user.to_make.should == [@recipe]
       end
     end
   end

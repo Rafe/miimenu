@@ -6,6 +6,7 @@ describe RecipesController do
   before do 
     @user = Factory(:user)
     @recipe = Factory(:recipe,:author => @user)
+    @user.stub!(:to_make).and_return([@recipe])
     sign_in @user
   end
 

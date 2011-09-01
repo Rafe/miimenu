@@ -7,10 +7,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_many :menus ,:dependent => :destroy
-  has_many :entries, :through => :menus, :source => :recipe
+  has_many :menus , :foreign_key => "owner_id", :dependent => :destroy
   has_many :recipes, :foreign_key => "author_id"
-  has_many :actions 
 
   has_many :relationships, :foreign_key => "follower_id",
            :dependent => :destroy
@@ -27,7 +25,19 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   def to_make
-    entries.where("category = ?","To make")
+    menu = menus.find_by_name("To make")
+    if menu
+      menu.recipes
+    else
+      menus.create()
+    end
+  end
+
+  def liked?(recipe)
+    menus.includes(:recipes).each do |menu|
+      return true if menu.recipes.include?(recipe)
+    end
+    false
   end
 
   def feed
@@ -44,6 +54,17 @@ class User < ActiveRecord::Base
 
   def unfollow!(followed)
     relationships.find_by_followed_id(followed).destroy
+  end
+
+  def like!(recipe,menu="To make")
+    menus.create(:name => menu) if menus.count == 0
+    menus.find_by_name(menu).entries.create(:recipe => recipe)
+  end
+
+  def menu_names
+    menus.map do |m|
+      m.name
+    end
   end
 
 end

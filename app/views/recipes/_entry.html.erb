@@ -11,6 +11,5 @@
       <%= entry.description %>
     </p>
   </div>
-  <%= button_to "delete",{:controller =>"menus", :action => :destroy, :id => entry.id},
-                            :method => :delete ,:class =>"delete-button" %>
+  <%= button_to "delete",entry_path(entry),:method => :delete ,:class =>"delete-button" %>
 </div>
