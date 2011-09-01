@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   def to_make
     menu = menus.find_by_name("To make")
     if menu
-      menu.recipes
+      menu
     else
       menus.create()
     end

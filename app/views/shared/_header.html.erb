@@ -8,7 +8,7 @@
       <% text_field_tag :q, "",:class => "search-bar" , :placeholder => "Search" %>
     <% end %>
     <% if user_signed_in? %>
-      <%= render :partial => "users/digest", :locals => {:user =>current_user} %>
+      <%= link_to("sign out",destroy_user_session_path) if current_user %>
     <% end %>
     <nav> <%= link_to "Home", root_path %> | Tw | Fb | G+ </nav>
   </div>

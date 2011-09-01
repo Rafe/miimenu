@@ -1,7 +1,0 @@
-<% if current_user %>
-  <div class="menu">
-    <%= select_tag(:category, menus_options) %>
-    
-    <%= render :partial => "entry", :collection => current_user.to_make %>
-  </div>
-<% end %>

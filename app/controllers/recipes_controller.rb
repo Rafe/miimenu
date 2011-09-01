@@ -1,5 +1,4 @@
 class RecipesController < ApplicationController
-
   before_filter :authenticate_user!, :except => :show
 
   def index
@@ -33,7 +32,11 @@ class RecipesController < ApplicationController
   end
 
   def update
-    Recipe.update_attributes!(params[:recipe])
+    if @recipe.update_attributes(params[:recipe])
+      redirect_to recipe_path(@recipe)
+    else
+      render action: :edit
+    end    
   end
 
   def destroy

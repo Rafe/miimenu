@@ -1,8 +1,6 @@
 <h1><%= @user.name%>'s Kitchen </h1>
 
-<%= render "shared/stat" %>
-
+<%= render :partial => "shared/stat", :locals => {:user => @user} %>
 <%= render :partial => "recipes/feed", :collection => @recipes %>
-
 <%= paginate @recipes %>
 

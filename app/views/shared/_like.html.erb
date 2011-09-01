@@ -1,5 +1,5 @@
 <% unless current_user.liked?(feed) %>
-  <%= form_for current_user.menus.find_by_name("To make").entries.build(:recipe_id => feed.id) do |f| %>
+  <%= form_for Entry.new(:menu_id => current_user.to_make.id,:recipe_id => feed.id) do |f| %>
     <div><%= f.hidden_field :recipe_id %></div>
     <div class="actions"><%= f.submit "like" %></div>
   <% end %>

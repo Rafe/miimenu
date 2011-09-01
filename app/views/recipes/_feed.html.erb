@@ -7,7 +7,6 @@
   </div>
   <h3><%= link_to feed.name, recipe_path(feed) %></h3>
     <p><%= feed.description %></p>
-    <div><%= raw to_html(feed.instructions) %></div>
     <div>
       <% feed.ingredients.each do |i| %>
         <span><%= i.name %> <%= i.quantity %></span>,

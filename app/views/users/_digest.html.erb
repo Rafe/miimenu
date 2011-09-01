@@ -1,4 +1,12 @@
 <div class="user">
   <%= gravatar_for user, :size => 30 %>
-  <%= link_to("sign out",destroy_user_session_path) if current_user %>
+  <div class="content">
+    <h5><%= link_to user.name,user_path(user) %></h5>
+    <span>
+      <%= user.followers.count %> followers
+    </span>
+    <span>
+      <%= user.recipes.count %> recipes
+    </span>
+  </div>
 </div>

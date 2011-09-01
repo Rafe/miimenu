@@ -1,12 +1,18 @@
-
-<%= render "shared/action_bar" %>
-
-<%= render "shared/menu" %>
+<%= render "menus/menu" %>
 
 <div class="recipes">
+  <div class="actions clearfix">
+    <%= button_to "Post", new_recipe_path ,:method =>:get %>
+    <div>
+      <%= button_to "Tags", users_path ,:method =>:get %>
+    </div>
+    <div>
+    <%= button_to "Users", users_path ,:method =>:get %>
+    </div>
+  </div>
   <div class="recipe-type"> 
-    <a href="?tab=news" title="Recipes from your friends and people you followed">News</a>|
-    <a href="?tab=interesting" title="Recipes that you interested with">Interesting</a>|
+    <%= link_to "News", "?tab=news",:title => "Recipes from your friends and people you followed" %>|
+    <%= link_to "Interesting", "?tab=interesting",:title => "Recipes that you're interested with"%>|
     Hot | Week | Summer </div>
   <%= render :partial => "feed", :collection => @recipes %>
 

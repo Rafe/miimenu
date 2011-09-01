@@ -1,10 +1,4 @@
 <div class="entry clearfix">
-  <div class="photo">
-  <% if entry.image? %>
-    <%= link_to image_tag(entry.image.url(:thumb)), recipe_path(entry),
-                :title => entry.description %>
-  <% end %>
-  </div>
   <div class="content">
     <h5><%= link_to entry.name , recipe_path(entry) %></h5>
     <p>

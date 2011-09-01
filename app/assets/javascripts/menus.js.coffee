@@ -1,7 +1,4 @@
 $ ->
-  $(".menu-button").click (e)->
-    $(".menu").toggle()
-
   $("#add-ingredients").click ()->
     id = $('.ingredient').length - 1
     $(".edit-ingredients").append("
