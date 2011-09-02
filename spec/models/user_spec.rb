@@ -98,28 +98,48 @@ describe User do
     end
   end
 
-
-  describe "add recipe to menu" do 
+  describe "user activities" do
     before do
       @user = Factory(:user)
       @recipe = Factory(:recipe, :author_id => @user.id)
     end
 
-    it "should add to entries" do
-      lambda do
-        @user.like!(@recipe)
-      end.should change(Entry,:count).by(1)
+    describe "like!" do 
+
+      it "should record in activities" do
+        lambda do
+          @user.like!(@recipe)
+        end.should change(Activity,:count).by(1)
+      end
+
+      it "should increase recipe's likes" do
+        lambda do
+          @user.like!(@recipe)
+        end.should change(@recipe,:likes).by(1)
+      end
     end
 
-    it "can add to 'To make' menu by default" do
-      @user.like!(@recipe)
-      @user.menus.find_by_name("To make").recipes == [@recipe]
-    end
+    describe "cook!" do
 
-    describe "to_make" do 
-      it "should return all entries in to make menu" do
-        @user.like!(@recipe)
-        @user.to_make.should == [@recipe]
+      it "should create an default menu if user have no menu" do
+        lambda do
+          @user.cook!(@recipe)
+        end.should change(@user.menus,:count).by(1)
+        @user.menus.find_by_name("To make").name.should_not be_nil
+      end
+
+      it "should add recipe to menu 'To make'" do
+        lambda do
+          @user.cook!(@recipe)
+        end.should change(Entry,:count).by(1)
+        @user.to_make.recipes.should include(@recipe)
+      end
+
+      it "should not add same recipe to menu 'To make twice'" do
+        lambda do
+          @user.cook!(@recipe)
+          @user.cook!(@recipe)
+        end.should change(Entry,:count).by(1)
       end
     end
   end
@@ -149,6 +169,10 @@ describe User do
         @user.following.should include(@user2)
       end
     end
+  end
+
+  it "menu_name should return menus name" do
+    
   end
 
 end

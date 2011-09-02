@@ -50,6 +50,23 @@ describe RecipesController do
     end
   end
 
+  describe "GET 'like'" do
+
+    it "should increase the recipe count" do
+      @user.stub!(:like!).with(@recipe)
+      get :like, :id => @recipe.id
+      response.should redirect_to root_path
+    end
+  end
+
+  describe "GET 'cook'" do
+    it "should add recipe to menu" do
+      @user.stub!(:cook!).with(@recipe)
+      get :cook, :id => @recipe.id
+      response.should redirect_to root_path
+    end
+  end
+
   describe "GET 'edit'" do
 
   end

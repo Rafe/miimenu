@@ -46,4 +46,16 @@ class RecipesController < ApplicationController
   def search
     @recipes = Recipe.search_for(params[:q]).page(params[:page]).per(10)
   end
+
+  def like
+    @recipe = Recipe.find(params[:id])
+    current_user.like!(@recipe)
+    redirect_back_or root_path
+  end
+
+  def cook 
+    @recipe = Recipe.find(params[:id])
+    current_user.cook!(@recipe)
+    redirect_back_or root_path
+  end
 end

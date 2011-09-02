@@ -14,6 +14,7 @@
     </div>
     <%= render :partial => "/users/author" , :object => feed.author %>
     <%= time_ago_in_words(feed.created_at) %> ago<br />
+    <div><%= feed.likes %> people likes</div>
     <%= render :partial => "shared/like" , :locals => {
       :feed => feed
     }%>

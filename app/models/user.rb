@@ -21,23 +21,18 @@ class User < ActiveRecord::Base
 
   has_many :followers, :through => :reverse_relationships, :source => :follower
 
+  has_many :activities, :dependent => :destroy
+  has_many :actions, :class_name => "Activity", :as => :target, :dependent => :destroy
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   def to_make
-    menu = menus.find_by_name("To make")
-    if menu
-      menu
-    else
-      menus.create()
-    end
+    menu = menus.find_by_name("To make") || menus.create()
   end
 
   def liked?(recipe)
-    menus.includes(:recipes).each do |menu|
-      return true if menu.recipes.include?(recipe)
-    end
-    false
+    activities.where(:target_type => :recipe,:target_id => recipe.id).first ? true : false
   end
 
   def feed
@@ -56,9 +51,14 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(followed).destroy
   end
 
-  def like!(recipe,menu="To make")
-    menus.create(:name => menu) if menus.count == 0
-    menus.find_by_name(menu).entries.create(:recipe => recipe)
+  def cook!(recipe,name="To make")
+    activities.create(:target => recipe,:action =>:cook)
+    menu = menus.find_by_name(name) || menus.create(:name => name)
+    menu.entries.create(:recipe => recipe)
+  end
+
+  def like!(recipe)
+    activities.create(:target => recipe,:action =>:like)
   end
 
   def menu_names

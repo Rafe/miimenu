@@ -10,6 +10,10 @@ Miimenu::Application.routes.draw do
     collection do
       get 'search'
     end
+    member do 
+      post 'like'
+      post 'cook'
+    end
   end
 
   resources :users do

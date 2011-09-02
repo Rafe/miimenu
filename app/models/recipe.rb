@@ -8,6 +8,8 @@ class Recipe < ActiveRecord::Base
   has_many :entries
   has_many :menus ,:through => :entries
 
+  has_many :actions, :class_name => "Activity", :as => :target, :dependent => :destroy
+
   has_attached_file :image, :styles => { 
     :medium => "300x300",
     :thumb => "100x100"
@@ -36,6 +38,10 @@ class Recipe < ActiveRecord::Base
   def self.search(query)
     condition = %(recipes.name LIKE :query OR ingredients.name LIKE :query)
     Recipe.joins(:ingredients).where(condition,{:query => "%#{query}%" })
+  end
+
+  def likes
+    actions.where(:action => [:like,:cook]).count
   end
 
 end
