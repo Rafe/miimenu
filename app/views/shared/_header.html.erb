@@ -10,7 +10,10 @@
     <% if user_signed_in? %>
     <% end %>
     <nav> 
-      <%= link_to "Home", root_path %> | Tw | Fb | G+ |
+      <%= link_to "Home", root_path %> | 
+      Tw | 
+      <%= link_to_facebook("Fb") %> | 
+      G+ |
       <%= link_to("sign out",destroy_user_session_path) if current_user %>
     </nav>
   </div>

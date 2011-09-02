@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :token_authenticatable
+         :token_authenticatable,:omniauthable
 
   validates_presence_of :name
 
@@ -64,6 +64,15 @@ class User < ActiveRecord::Base
   def menu_names
     menus.map do |m|
       m.name
+    end
+  end
+  
+  def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    data = access_token['extra']['user_hash']
+    if user = User.find_by_email(data["email"])
+      user 
+    else
+      User.create(:email => data["email"], :password => Devise.friendly_token[0,20])
     end
   end
 

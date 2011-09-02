@@ -47,7 +47,9 @@ gem 'paperclip'
 
 #user authurize
 gem 'devise', '>= 1.4.2'
+gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
 
+# render recipe instruction
 gem 'maruku'
 
 group :test, :development do

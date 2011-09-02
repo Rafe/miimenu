@@ -8,4 +8,8 @@ module UsersHelper
   def current_user?(user)
     current_user == user
   end
+
+  def link_to_facebook(description)
+    link_to description, user_omniauth_authorize_path(:facebook)
+  end
 end
