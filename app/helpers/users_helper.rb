@@ -12,4 +12,8 @@ module UsersHelper
   def link_to_facebook(description)
     link_to description, user_omniauth_authorize_path(:facebook)
   end
+
+  def link_to_twitter(description)
+    link_to description, user_omniauth_authorize_path(:facebook)
+  end
 end
