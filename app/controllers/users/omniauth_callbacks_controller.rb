@@ -13,7 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def twitter
     auth_data = env["omniauth.auth"]["extra"]
-    render :text => auth_data, :format => :yaml
+    render :text => auth_data["user_hash"], :format => :yaml
     #@user = User.find_by_name(auth_data["user_info"]["name"])
     #if @user.persisted?
     #  flash[:notice] = "login with twitter success"
