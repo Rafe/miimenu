@@ -12,10 +12,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def twitter
-    render :text => env["omniauth.auth"] ,:format => :yaml
     #auth_data = env["mmniauth.auth"]["extra"]["user_info"]
 
     #user = User.find_by_name(auth_data["user_info"]["name"])
+    #render :text => env["omniauth.auth"] ,:format => :yaml
     sign_in_and_redirect @user.first, :event => :authentication
   end
 end
