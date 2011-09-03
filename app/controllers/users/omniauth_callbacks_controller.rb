@@ -13,13 +13,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def twitter
     user_hash = env["omniauth.auth"]["extra"]["user_hash"]
-    @user = User.find_by_name(user_hash["name"])
-    if @user.persisted?
-      flash[:notice] = "login with twitter success"
-      sign_in_and_redirect @user, :event => :authentication
-    else
-      session["devise.twitter_data"] = env["omniauth.auth"]
-      redirect_to new_user_registration_url
-    end
+    render :text => user_hash["name"]
+    #@user = User.find_by_name(user_hash["name"])
+    #if @user.persisted?
+    #  flash[:notice] = "login with twitter success"
+    #  sign_in_and_redirect @user, :event => :authentication
+    #else
+    #  session["devise.twitter_data"] = env["omniauth.auth"]
+    #  redirect_to new_user_registration_url
+    #end
   end
 end
