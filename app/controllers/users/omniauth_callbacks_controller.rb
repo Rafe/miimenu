@@ -16,6 +16,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     #auth_data = env["mmniauth.auth"]["extra"]["user_info"]
 
     #user = User.find_by_name(auth_data["user_info"]["name"])
-    #sign_in_and_redirect user, :event => :authentication
+    sign_in_and_redirect @user.first, :event => :authentication
   end
 end
