@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 
   def cook!(recipe,name="To make")
     activities.create(:target => recipe,:action =>:cook)
-    menu = menus.find_by_name(name) || menus.create(:name => name)
+    menu = menus.find_or_create_by_name(name)
     menu.entries.create(:recipe => recipe)
   end
 
@@ -77,8 +77,6 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
-    data = access_token
-    #raise Error(data)
     first
   end
 
