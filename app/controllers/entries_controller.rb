@@ -6,12 +6,12 @@ class EntriesController < ApplicationController
   def create
     @recipe = Recipe.find(params[:entry][:recipe_id])
     current_user.cook!(@recipe)
-    redirect_back_or root_path
+    redirect_to request.referer
   end
 
   def destroy
     Entry.joins(:menu).where("menus.owner_id = ?",current_user.id).first.destroy
-    redirect_back_or root_path
+    redirect_to request.referer
   end
 
 end

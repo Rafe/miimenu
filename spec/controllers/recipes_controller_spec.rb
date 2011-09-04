@@ -4,6 +4,7 @@ describe RecipesController do
   render_views
 
   before do 
+    request.env["HTTP_REFERER"] = "/"
     @user = Factory(:user)
     @recipe = Factory(:recipe,:author => @user)
     @user.stub!(:to_make).and_return([@recipe])

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe EntriesController do
 
   before do
+    request.env["HTTP_REFERER"] = "/"
     @user = Factory(:user)
     @recipe = Factory(:recipe,:author => @user)
     @menu = @user.menus.create()
@@ -15,7 +16,6 @@ describe EntriesController do
       lambda do
         post :create ,{:entry => {:recipe_id => @recipe.id}}
       end.should change(Entry,:count).by(1)
-      response.should redirect_to(root_path)
     end
   end
 
@@ -25,7 +25,6 @@ describe EntriesController do
       lambda do 
         delete :destroy ,:id => @recipe.id
       end.should change(Entry,:count).by(-1)
-      response.should redirect_to(root_path)
     end
   end
 end

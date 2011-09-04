@@ -3,12 +3,13 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_locale
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to
   end
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
   
   protected
   

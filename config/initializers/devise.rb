@@ -139,6 +139,40 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
+
+  # turn on "test mode" for OmniAuth 
+  
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.mock_auth[:twitter] = {
+    'provider' => 'twitter',
+    'uid' => '123456',
+    'credentials' => {
+      "token"=>"128276807-I0BiDj4dyqilsBGDbMixfdfcaIXjkRn1jn6tuRPh", 
+      "secret"=>"KObXEBc7vu6aMYN32aVkw042eFrI5MLSqiO8KSSvzKc"
+    },
+    'user_info' => { 
+      'name' => "Jimmy Chao",
+      'image' => "http://a2.twimg.com/profile_images/1229628289/jimchao_normal.jpg"
+    }
+  }
+
+  OmniAuth.config.mock_auth[:facebook] = {
+    'provider' => 'facebook',
+    'uid' => '123456',
+    'credentials' => {
+      "token" => "AAACrAU9ZAyIQBAL99YdbMZAZAlO8whr5lVQVtGpzTawZBCZAB8x1Dxn0QqCzRjBBskzSgtvBZCZC51cqCuX64qZBeoFvbjm9Ns4ZD"
+    },
+    'user_info' => {
+      'name' => 'Jimmy Chao',
+      'email' => 'daizenga@gmail.com',
+      'image' => 'http://graph.facebook.com/1464651440/picture?type=square'
+    }
+  }
+
+  config.omniauth :twitter, 
+    "Wmv6wuw9HKOlW0JfxnHw", 
+    "bEE9i0fOPqVbX2VTNfAaRBsLoPC2VCxhw7Rkz7TQ"
+
   config.omniauth :facebook, "188022114601092", "45a4fc0209a353265ad4b5efb77b216e"
-  config.omniauth :twitter, "Wmv6wuw9HKOlW0JfxnHw", "bEE9i0fOPqVbX2VTNfAaRBsLoPC2VCxhw7Rkz7TQ"
 end

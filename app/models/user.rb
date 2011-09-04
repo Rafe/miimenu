@@ -68,18 +68,24 @@ class User < ActiveRecord::Base
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
-    data = access_token['extra']['user_hash']
-    if user = User.find_by_email(data["email"])
+    user_info = access_token['user_info']
+    if user = User.find_by_email(user_info['email'])
       user 
     else
-      User.create(:email => data["email"], :password => Devise.friendly_token[0,20])
+      User.create(:name => user_info['name'],
+                  :email => user_info['email'], 
+                  :password => Devise.friendly_token[0,20])
     end
   end
 
   def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
-    first
+    user_info = access_token['user_info']
+    if user = User.find_by_name(user_info['name'])
+      user 
+    else
+      User.new(:name => user_info['name'])
+    end
   end
-
 end
 # == Schema Information
 #

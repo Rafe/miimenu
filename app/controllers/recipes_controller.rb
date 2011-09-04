@@ -50,12 +50,12 @@ class RecipesController < ApplicationController
   def like
     @recipe = Recipe.find(params[:id])
     current_user.like!(@recipe)
-    redirect_back_or root_path
+    redirect_to request.referer
   end
 
   def cook 
     @recipe = Recipe.find(params[:id])
     current_user.cook!(@recipe)
-    redirect_back_or root_path
+    redirect_to request.referer
   end
 end

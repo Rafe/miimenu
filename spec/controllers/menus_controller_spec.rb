@@ -3,6 +3,7 @@ require 'spec_helper'
 describe MenusController do
 
   before do
+    request.env["HTTP_REFERER"] = "/"
     @user = Factory(:user)
     @recipe = Factory(:recipe,:author => @user)
   end
