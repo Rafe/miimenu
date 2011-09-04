@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901220012) do
+ActiveRecord::Schema.define(:version => 20110904193956) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(:version => 20110901220012) do
 
   add_index "activities", ["action"], :name => "index_activities_on_type"
   add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "credentials"
+  end
 
   create_table "entries", :force => true do |t|
     t.integer  "menu_id"
@@ -92,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20110901220012) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "image_url"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

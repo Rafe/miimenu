@@ -24,8 +24,10 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :actions, :class_name => "Activity", :as => :target, :dependent => :destroy
 
+  has_many :authentications
+
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :image_url
 
   def to_make
     menu = menus.find_by_name("To make") || menus.create()
@@ -68,22 +70,46 @@ class User < ActiveRecord::Base
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    #1.find authentications exist, => true, sync and return user, false => user? build auth, build user with auth
     user_info = access_token['user_info']
-    if user = User.find_by_email(user_info['email'])
-      user 
-    else
-      User.create(:name => user_info['name'],
-                  :email => user_info['email'], 
-                  :password => Devise.friendly_token[0,20])
+
+    authentication = Authentication.find_by_uid_and_provider(access_token['uid'],access_token['provider'])
+    if authentication
+      #update and return data
+      authentication.user.image_url = user_info['image']
+      authentication.user.save
+      authentication.user
+    else 
+      user = signed_in_resource || 
+             User.create(:name => user_info['name'],
+                      :email => user_info['email'], 
+                      :password => Devise.friendly_token[0,20],
+                      :image_url => user_info['image'])
+      user.authentications.create(
+        :uid => access_token['uid'],
+        :provider => access_token['provider'],
+        :credentials => access_token['credentials']
+      )
+      user
     end
   end
 
   def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
     user_info = access_token['user_info']
-    if user = User.find_by_name(user_info['name'])
-      user 
-    else
-      User.new(:name => user_info['name'])
+
+    authentication = Authentication.find_by_uid_and_provider(access_token['uid'],access_token['provider'])
+    if authentication
+      #update and return data
+      authentication.user.image_url = user_info['image']
+      authentication.user.save
+      authentication.user
+    elsif signed_in_resource 
+      signed_in_resource.authentications.create(
+        :uid => access_token['uid'],
+        :provider => access_token['provider'],
+        :credentials => access_token['credentials']
+      )
+      signed_in_resource
     end
   end
 end

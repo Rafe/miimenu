@@ -146,7 +146,7 @@ Devise.setup do |config|
 
   OmniAuth.config.mock_auth[:twitter] = {
     'provider' => 'twitter',
-    'uid' => '123456',
+    'uid' => '234567',
     'credentials' => {
       "token"=>"128276807-I0BiDj4dyqilsBGDbMixfdfcaIXjkRn1jn6tuRPh", 
       "secret"=>"KObXEBc7vu6aMYN32aVkw042eFrI5MLSqiO8KSSvzKc"
