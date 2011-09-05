@@ -68,6 +68,25 @@ describe RecipesController do
     end
   end
 
+  describe "POST 'create'" do 
+    before do 
+      @attr = {
+        :name => "test dish",
+        :description => "test",
+        :instructions => "test",
+        :ingredients_attributes => [{:name => "food",:quantity => "100gram"}]
+      }
+    end
+
+    it "should create a new recipe" do 
+      lambda do
+        post :create , :recipe => @attr
+      end.should change(@user.recipes,:count).by(1)
+
+      response.should redirect_to(Recipe.all.last)
+    end
+  end
+
   describe "GET 'edit'" do
 
   end

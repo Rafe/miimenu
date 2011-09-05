@@ -21,3 +21,7 @@ Factory.define :recipe do |r|
   r.instructions "1.cook 2.cook 3.cook"
   r.ingredients {|ingredients| [ingredients.association(:ingredient)] }
 end
+
+Factory.define :comment do |c|
+  c.text "test"
+end
