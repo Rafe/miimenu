@@ -171,8 +171,8 @@ describe User do
     end
   end
 
-  it "menu_name should return menus name" do
-    
+  describe "authentications" do
+
   end
 
 end
