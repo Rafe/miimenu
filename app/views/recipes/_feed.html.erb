@@ -16,6 +16,6 @@
     <%= time_ago_in_words(feed.created_at) %> ago<br />
     <div><%= feed.likes %> people likes</div>
     <%= render :partial => "shared/like" , :locals => {
-      :feed => feed
+      :item => feed
     }%>
 </div>

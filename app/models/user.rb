@@ -109,6 +109,8 @@ class User < ActiveRecord::Base
         :provider => access_token['provider'],
         :credentials => access_token['credentials']
       )
+      signed_in_resource.image_url = user_info["image_url"]
+      signed_in_resource.save 
       signed_in_resource
     end
   end

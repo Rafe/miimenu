@@ -1,5 +1,5 @@
 <div class="recipe">
-  <div class="content">
+  <div class="content clearfix">
     <div class="main-photo">
       <% if recipe.image? %>
         <div><%= image_tag(recipe.image.url(:medium),:witdh => 300) %></div>
@@ -14,12 +14,12 @@
           <% end %>  
         </ul>
         <%= render :partial => "users/author", :object => recipe.author %>
-        <%= time_ago_in_words(recipe.created_at) %>ago<br />
+        <%= time_ago_in_words(recipe.created_at) %> ago<br />
+        <%= render :partial => "shared/like" , :locals => { :item => recipe }%>
       </div>
-    <div class="clearfix"/>
-    </div>
-    <div class="instructions clearfix">
-      <%= sanitize to_html(recipe.instructions) %>
-    </div>
   </div>
+  <div class="instructions clearfix">
+    <%= sanitize to_html(recipe.instructions) %>
+  </div>
+</div>
 
