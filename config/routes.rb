@@ -9,6 +9,7 @@ Miimenu::Application.routes.draw do
   resources :users, :only => [:index, :show]
 
   resources :recipes do
+    resources :comments, :only => [:index,:create,:destroy]
     collection do
       get 'search'
     end
@@ -16,10 +17,6 @@ Miimenu::Application.routes.draw do
       post 'like'
       post 'cook'
     end
-  end
-
-  resources :users do
-    resources :recipes
   end
 
   resources :menus, :only => [:create, :destroy]

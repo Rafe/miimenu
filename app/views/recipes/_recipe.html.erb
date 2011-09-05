@@ -23,6 +23,10 @@
   </div>
   <div class="comments clearfix">
     <%= render :partial => "comments/comment", :collection => recipe.comments %>
+    <%= form_for Comment.new(:commenter => current_user,:recipe => recipe), :url => recipe_comments_path(recipe) do |f| %>
+      <%= f.text_field :text %>
+      <%= f.submit "post "%>
+    <% end %>
   </div>
 </div>
 
