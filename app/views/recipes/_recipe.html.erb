@@ -21,5 +21,8 @@
   <div class="instructions clearfix">
     <%= sanitize to_html(recipe.instructions) %>
   </div>
+  <div class="comments clearfix">
+    <%= render :partial => "comments/comment", :collection => recipe.comments %>
+  </div>
 </div>
 

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :menus , :foreign_key => "owner_id", :dependent => :destroy
   has_many :recipes, :foreign_key => "author_id"
+  has_many :comments, :foreign_key => "commenter_id"
 
   has_many :relationships, :foreign_key => "follower_id",
            :dependent => :destroy
@@ -80,8 +81,8 @@ class User < ActiveRecord::Base
       authentication.user.save
       authentication.user
     else 
-      user = signed_in_resource || 
-             User.create(:name => user_info['name'],
+      user = signed_in_resource || find_by_email(user_info['email']) ||
+             create(:name => user_info['name'],
                       :email => user_info['email'], 
                       :password => Devise.friendly_token[0,20],
                       :image_url => user_info['image'])

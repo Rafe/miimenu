@@ -1,0 +1,10 @@
+<div class="comment clearfix">
+  <div style="float:left">
+  <%= render :partial => "users/digest", :locals => {:user => comment.commenter} %>
+  </div>
+  <div style="float:left">
+    <p><%= comment.text %></p>
+    <p><%= time_ago_in_words(comment.created_at) %> ago</p>
+  </div>
+  <div class="clearfix"/>
+</div>

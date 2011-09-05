@@ -8,6 +8,8 @@ class Recipe < ActiveRecord::Base
   has_many :entries
   has_many :menus ,:through => :entries
 
+  has_many :comments
+
   has_many :actions, :class_name => "Activity", :as => :target, :dependent => :destroy
 
   has_attached_file :image, :styles => { 
