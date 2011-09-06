@@ -20,6 +20,7 @@ Factory.define :recipe do |r|
   r.description "good things"
   r.instructions "1.cook 2.cook 3.cook"
   r.ingredients {|ingredients| [ingredients.association(:ingredient)] }
+  r.tags "chinese, japanese, spicy"
 end
 
 Factory.define :comment do |c|

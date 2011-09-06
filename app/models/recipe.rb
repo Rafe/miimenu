@@ -30,6 +30,10 @@ class Recipe < ActiveRecord::Base
 
   scope :search_for, lambda {|query| search(query) }
 
+  def tags_names 
+    tags ? tags.split() : []
+  end
+
   def self.followed_by(user)
     following_ids = %(SELECT followed_id FROM relationships 
                       WHERE follower_id = :user_id)
