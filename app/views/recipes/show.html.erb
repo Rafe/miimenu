@@ -1,7 +1,6 @@
 <%= render "menus/menu" %>
-
 <div class="recipes">
-  <%= render "shared/action_bar" %>
-  <%= link_to "<= back to recipes" , root_path %>
+  <%= render partial: "shared/action_bar", locals: {action: :show }%>
+  <div class="clearfix"></div>
   <%= render @recipe %>
 </div>

@@ -3,6 +3,11 @@ class EntriesController < ApplicationController
 
   respond_to :html, :js
 
+  def index
+    @entries = current_user.to_make.recipes
+    render json: @entries
+  end
+
   def create
     @recipe = Recipe.find(params[:entry][:recipe_id])
     current_user.cook!(@recipe)
@@ -10,8 +15,8 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    Entry.joins(:menu).where("menus.owner_id = ?",current_user.id).first.destroy
-    redirect_to request.referer
+    Entry.joins(:menu).where("menus.owner_id = ? and entries.recipe_id = ?",current_user.id,params[:id]).first.destroy
+    render text: "success"
   end
 
 end

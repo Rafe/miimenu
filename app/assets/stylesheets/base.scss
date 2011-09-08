@@ -47,3 +47,17 @@ footer{
     float:left;
   }
 }
+.button_to input{
+  border-radius: 5px;
+  background: -webkit-gradient(linear,0% 0,0% 100%, from(#fff),to(#e1e1e1));
+  height:26px;
+  margin:5px;
+  font-size:14px;
+  padding:0 7px;
+  &:hover{
+    background: #EEE;
+  }
+  &:active{
+    background: gray;
+  }
+}

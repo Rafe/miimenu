@@ -2,10 +2,14 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!, :except => :show
 
   def index
-    if params[:tab] == "interesting"
+    if params[:tab] == "all"
       @recipes = Recipe.includes(:ingredients).page(params[:page]).per(10)
     else
       @recipes = current_user.feed.includes(:ingredients).page(params[:page]).per(10)
+    end
+    respond_to do |format|
+      format.html
+      format.json {render json: @recipes}
     end
   end
 

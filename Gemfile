@@ -20,6 +20,7 @@ gem 'sass'
 gem 'html5-boilerplate'
 
 gem 'jquery-rails'
+gem 'rails-backbone'
 
 # Use unicorn as the web server
 gem 'unicorn'

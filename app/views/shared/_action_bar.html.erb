@@ -1,9 +1,10 @@
 <div class="actions clearfix">
-  <%= button_to "Post", new_recipe_path ,:method =>:get %>
-  <div>
-    <%= button_to "Tags", users_path ,:method =>:get %>
+  <% if action == :show %>
+  <div class="button_to">
+    <input type="submit" value="<=" onclick="history.back()"/>
   </div>
-  <div>
-  <%= button_to "Users", users_path ,:method =>:get %>
-  </div>
+  </form>
+  <% end %>
+  <%= button_to "Post", new_recipe_path , method: :get %>
+  <%= button_to "Users", users_path , method: :get %>
 </div>
