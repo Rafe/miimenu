@@ -1,13 +1,8 @@
 <% if current_user %>
   <div id="menu" class="menu">
     <%= render :partial => "users/digest", :locals => {:user =>current_user} %>
-    <h4>To Make</h4>
+    <div class="to-make">
+      <h4>To Make</h4>
+    </div>
   </div>
-  <script>
-    $(function(){
-      var model = new Miimenu.Models.Recipes();
-      var view = new Miimenu.Views.MenuView(model);
-      model.reset(<%= raw(current_user.to_make.recipes.to_json) %>)
-    });
-  </script>
 <% end %>

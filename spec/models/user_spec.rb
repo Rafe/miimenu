@@ -47,10 +47,12 @@ describe User do
   end
 
   describe "menu_names" do
-    it "should return menu names that user have" do
+    it "should return menu names and counts that user have" do
       user = Factory(:user)
-      menu = user.menus.create()
-      user.menu_names.should == [menu.name]
+      recipe = Factory(:recipe,:author => user)
+      user.entries.create(:recipe_id => recipe.id,:menu => "Test")
+      user.menu_names.first.menu.should == "Test"
+      user.menu_names.first.count.should == 1
     end
   end
 
@@ -98,7 +100,7 @@ describe User do
     end
   end
 
-  describe "user activities" do
+  describe "activities" do
     before do
       @user = Factory(:user)
       @recipe = Factory(:recipe, :author_id => @user.id)
@@ -121,18 +123,16 @@ describe User do
 
     describe "cook!" do
 
-      it "should create an default menu if user have no menu" do
-        lambda do
-          @user.cook!(@recipe)
-        end.should change(@user.menus,:count).by(1)
-        @user.menus.find_by_name("To make").name.should_not be_nil
+      it "should set an default menu 'To make' for entry" do
+        @user.cook!(@recipe)
+        @user.entries.find_by_recipe_id(@recipe).menu.should == "To make"
       end
 
       it "should add recipe to menu 'To make'" do
         lambda do
           @user.cook!(@recipe)
         end.should change(Entry,:count).by(1)
-        @user.to_make.recipes.should include(@recipe)
+        @user.menus.should include(@recipe)
       end
 
       it "should not add same recipe to menu 'To make twice'" do

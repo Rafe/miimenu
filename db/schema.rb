@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110905134803) do
+ActiveRecord::Schema.define(:version => 20110908045812) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -45,13 +45,14 @@ ActiveRecord::Schema.define(:version => 20110905134803) do
   add_index "comments", ["recipe_id"], :name => "index_comments_on_recipe_id"
 
   create_table "entries", :force => true do |t|
-    t.integer  "menu_id"
     t.integer  "recipe_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "menu"
+    t.integer  "owner_id"
   end
 
-  add_index "entries", ["menu_id"], :name => "index_entries_on_menu_id"
+  add_index "entries", ["owner_id", "menu", "recipe_id"], :name => "index_entries_on_owner_id_and_menu_and_recipe_id"
 
   create_table "ingredients", :force => true do |t|
     t.string   "name"
@@ -62,16 +63,6 @@ ActiveRecord::Schema.define(:version => 20110905134803) do
   end
 
   add_index "ingredients", ["recipe_id"], :name => "index_ingredients_on_recipe_id"
-
-  create_table "menus", :force => true do |t|
-    t.integer  "owner_id"
-    t.string   "name",       :default => "To make"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "menus", ["name"], :name => "index_menus_on_name"
-  add_index "menus", ["owner_id"], :name => "index_menus_on_owner_id"
 
   create_table "recipes", :force => true do |t|
     t.string   "name"

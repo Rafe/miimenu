@@ -1,6 +1,12 @@
 <%= render "menus/menu" %>
 <div class="recipes">
-  <%= render partial: "shared/action_bar", locals: {action: :show }%>
+  <%= render partial: "shared/action_bar", locals: {action: :show }%>.
   <div class="clearfix"></div>
   <%= render @recipe %>
+  <script>
+    $(function(){
+      var app = new Miimenu.Routers.AppRouter();
+      app.menuModel.reset(<%= raw(current_user.to_make.to_json) %>)
+    });
+  </script>
 </div>

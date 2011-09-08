@@ -1,9 +1,6 @@
 <header>
   <div class="content">
     <h1 class="logo"><%= link_to "Miimenu",root_path%></h1>    
-    <div class="jewel">
-      [Cmt][Rcp][Fow]
-    </div>
     <%= form_tag(search_recipes_path , :method => "get" , :class => "search-form") do %>
       <% text_field_tag :q, "",:class => "search-bar" , :placeholder => "Search" %>
     <% end %>

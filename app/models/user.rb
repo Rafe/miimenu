@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_many :menus , :foreign_key => "owner_id", :dependent => :destroy
+  has_many :entries , :foreign_key => "owner_id", :dependent => :destroy
+  has_many :menus , :through => :entries, :source => :recipe
   has_many :recipes, :foreign_key => "author_id"
   has_many :comments, :foreign_key => "commenter_id"
 
@@ -31,11 +32,19 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :image_url
 
   def to_make
-    menu = menus.find_by_name("To make") || menus.create()
+    menus.where("entries.menu = 'To make'")
+  end
+
+  def menu_names
+    entries.group(:menu).select("count(*) count, menu")
   end
 
   def liked?(recipe)
     activities.where(:target_type => :recipe,:target_id => recipe.id).first ? true : false
+  end
+
+  def cooking?(recipe)
+    entries.find_by_recipe_id(recipe.id) ? true : false
   end
 
   def feed
@@ -54,20 +63,13 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(followed).destroy
   end
 
-  def cook!(recipe,name="To make")
+  def cook!(recipe,menu="To make")
     activities.create(:target => recipe,:action =>:cook)
-    menu = menus.find_or_create_by_name(name)
-    menu.entries.create(:recipe => recipe)
+    entries.create(:recipe => recipe, :menu => menu)
   end
 
   def like!(recipe)
     activities.create(:target => recipe,:action =>:like)
-  end
-
-  def menu_names
-    menus.map do |m|
-      m.name
-    end
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
@@ -116,24 +118,3 @@ class User < ActiveRecord::Base
     end
   end
 end
-# == Schema Information
-#
-# Table name: users
-#
-#  id                   :integer(4)      not null, primary key
-#  email                :string(255)     default(""), not null
-#  encrypted_password   :string(128)     default(""), not null
-#  password_salt        :string(255)     default(""), not null
-#  reset_password_token :string(255)
-#  remember_token       :string(255)
-#  remember_created_at  :datetime
-#  sign_in_count        :integer(4)      default(0)
-#  current_sign_in_at   :datetime
-#  last_sign_in_at      :datetime
-#  current_sign_in_ip   :string(255)
-#  last_sign_in_ip      :string(255)
-#  created_at           :datetime
-#  updated_at           :datetime
-#  name                 :string(255)
-#
-

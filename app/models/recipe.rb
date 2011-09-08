@@ -6,10 +6,9 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :ingredients
 
   has_many :entries
-  has_many :menus ,:through => :entries
+  has_many :cooks ,:foreign_key => :owner_id, :class_name => "User" ,:through => :entries
 
   has_many :comments
-
   has_many :actions, :class_name => "Activity", :as => :target, :dependent => :destroy
 
   has_attached_file :image, :styles => { 
@@ -50,22 +49,8 @@ class Recipe < ActiveRecord::Base
     actions.where(:action => [:like,:cook]).count
   end
 
+  def medium_image
+    image.url(:medium)
+  end
 end
-# == Schema Information
-#
-# Table name: recipes
-#
-#  id                 :integer(4)      not null, primary key
-#  name               :string(255)
-#  description        :text
-#  instructions       :text
-#  created_at         :datetime
-#  updated_at         :datetime
-#  image_file_name    :string(255)
-#  image_content_type :string(255)
-#  image_file_size    :integer(4)
-#  image_updated_at   :datetime
-#  author_id          :integer(4)
-#  tags               :string(255)
-#
 

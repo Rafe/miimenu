@@ -7,14 +7,14 @@ describe Entry do
     @menu = @user.menus.create()
   end
 
-  it "belongs to a menu" do
-    entry = @menu.entries.create(:recipe => @recipe)
-    entry.menu.should == @menu
+  it "should have a menu name" do
+    entry = @user.entries.create(:recipe => @recipe,:menu => "To make")
+    entry.menu.should == "To make"
        
   end
 
   it "belongs to a recipe" do
-    entry = @menu.entries.create(:recipe => @recipe)
+    entry = @user.entries.create(:recipe => @recipe,:menu => "To make")
     entry.recipe.should == @recipe
   end
 end

@@ -6,7 +6,6 @@ describe EntriesController do
     request.env["HTTP_REFERER"] = "/"
     @user = Factory(:user)
     @recipe = Factory(:recipe,:author => @user)
-    @menu = @user.menus.create()
     sign_in @user
   end
 
@@ -21,7 +20,7 @@ describe EntriesController do
 
   describe "DELETE destroy" do
     it "should delete entry in menu" do 
-      @menu.entries.create(:recipe => @recipe)
+      @user.entries.create(:recipe_id => @recipe.id,:menu => "To make")
       lambda do 
         delete :destroy ,:id => @recipe.id
       end.should change(Entry,:count).by(-1)

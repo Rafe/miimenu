@@ -2,7 +2,7 @@ class MenusController < ApplicationController
   before_filter :authenticate_user!
 
   def create 
-    current_user.menus.create(:name => params[:name])
+    current_user.entries.create(:name => params[:name])
     redirect_to request.referer
   end
 

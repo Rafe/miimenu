@@ -13,13 +13,6 @@
           <li><%= i.name %> <%= i.quantity %></li>
         <% end %>  
       </ul>
-      <div class="tags">
-        <% recipe.tags_names.each do |t| %>
-          <span style="line-height:26px;margin:5px;border:1px black solid">
-            <%= link_to t, search_recipes_path %>
-          </span>
-        <% end %>
-      </div>
       <%= render :partial => "users/author", :object => recipe.author %>
       <%= time_ago_in_words(recipe.created_at) %> ago<br />
       <%= render :partial => "shared/like" , :locals => { :item => recipe }%>

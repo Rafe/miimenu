@@ -1,0 +1,21 @@
+<div class="main-photo">
+  <a href="recipes/<%= id %>" title="<%= name %>">
+    <img src="<%= medium_image %>" width="200" height="160"/></a>
+</div>
+
+<h3>
+  <a href="recipes/<%= id %>" title="<%= name %>">
+    <%= name %>
+  </a>
+</h3>
+<p><%= description %></p>
+<div>
+  <% _.each(ingredients,function(i){ %>
+    <span><%= i.name %></span> ,
+  <% }); %>  
+</div>
+<% if(author.image_url) { %>
+  <div><img src="<%= author.image_url %>"/><%= author.name %></div>
+<% } %>
+<div><abbr class="timeago" title="<%= created_at %>"></abbr></div>
+<div><%= likes %> likes</div>

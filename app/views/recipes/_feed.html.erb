@@ -9,12 +9,12 @@
     <p><%= feed.description %></p>
     <div>
       <% feed.ingredients.each do |i| %>
-        <span><%= i.name %> <%= i.quantity %></span>,
+        <span><%= i.name %></span> , 
       <% end %>  
     </div>
     <%= render :partial => "/users/author" , :object => feed.author %>
     <%= time_ago_in_words(feed.created_at) %> ago<br />
-    <div><%= feed.likes %> people likes</div>
+    <div><%= feed.likes %> likes</div>
     <%= render :partial => "shared/like" , :locals => {
       :item => feed
     }%>

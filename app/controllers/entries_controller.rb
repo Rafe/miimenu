@@ -4,8 +4,7 @@ class EntriesController < ApplicationController
   respond_to :html, :js
 
   def index
-    @entries = current_user.to_make.recipes
-    render json: @entries
+    render json: current_user.to_make
   end
 
   def create
@@ -15,8 +14,8 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    Entry.joins(:menu).where("menus.owner_id = ? and entries.recipe_id = ?",current_user.id,params[:id]).first.destroy
-    render text: "success"
+    current_user.entries.find_by_recipe_id(params[:id]).destroy
+    render json: {status: "success"}
   end
 
 end

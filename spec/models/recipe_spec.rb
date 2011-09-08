@@ -16,14 +16,12 @@ describe Recipe do
 
   end
 
-  describe "menu" do
+  describe "cooking?" do
     before do
-      @menu = @user.menus.create(:name => "To make")
-      @menu.entries.create(:recipe_id => @recipe.id)
-      
+      @user.entries.create(:recipe_id => @recipe.id,:menu =>"To make")
     end
-    it "should show the menus have recipe" do
-      @recipe.menus.should == [@menu]
+    it "should show the recipe is in user's to_make menu or not" do
+      @user.cooking?(@recipe).should == true
     end
   end
 

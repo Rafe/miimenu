@@ -21,8 +21,10 @@ header{
   }
   .search-form{
     float:left;
-    margin:6px;
+    margin:5px;
+    margin-left:50px;
     input{
+      height:18px;
       padding:6px 25px 4px 6px;
       width:180px;
     }

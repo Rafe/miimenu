@@ -1,9 +1,7 @@
-<%= render "shared/action_bar" %>
-
 <%= render "menus/menu" %>
 
 <div class="recipes">
-
+  <%= render partial: "shared/action_bar", locals: { action: :search} %>
   <div>
     <%= form_tag(search_recipes_path, :method => :get) do %>
       <%= text_field_tag(:q,params[:q]) %>
@@ -13,4 +11,10 @@
   <%= render :partial => "feed", :collection => @recipes %>
 
   <%= paginate @recipes %>
+  <script>
+    $(function(){
+      var app = new Miimenu.Routers.AppRouter();
+      app.menuModel.reset(<%= raw(current_user.to_make.to_json) %>)
+    });
+  </script>
 </div>
