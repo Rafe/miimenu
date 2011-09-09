@@ -2,18 +2,15 @@
 
 <div class="recipes">
   <%= render partial: "shared/action_bar", locals: {action: :index }%>
-  <div class="clearfix"></div>
   <div id="recipes-view" class="recipe-type clearfix"> 
     <%= link_to "News", "?tab=news",:title => "Recipes from your friends and people you followed" %>|
     <%= link_to "All", "?tab=all",:title => "All recipes"%>
-  <%= render :partial => "feed", :collection => @recipes %>
-  <%= paginate @recipes %>
 
   <script>
     $(function(){
       var app = new Miimenu.Routers.AppRouter();
-      app.menuModel.reset(<%= raw(current_user.to_make.to_json) %>)
-      app.feedModel.reset(<%= raw(@recipes.to_json(:include => [:ingredients,:author],:methods => [:medium_image,:likes])) %>)
+      app.menuModel.reset(<%= raw(current_user.to_make.to_json) %>);
+      app.feedModel.reset(<%= raw(@recipes_response) %>)
     });
   </script>
 </div>

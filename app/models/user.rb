@@ -1,3 +1,4 @@
+require "digest/md5"
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
@@ -70,6 +71,11 @@ class User < ActiveRecord::Base
 
   def like!(recipe)
     activities.create(:target => recipe,:action =>:like)
+  end
+  
+  def gravatar_url
+    gravatar_id = Digest::MD5.hexdigest(email.downcase)
+    image_url = "http://gravatar.com/avatar/#{gravatar_id}"
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)

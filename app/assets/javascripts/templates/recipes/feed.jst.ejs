@@ -14,8 +14,20 @@
     <span><%= i.name %></span> ,
   <% }); %>  
 </div>
+<div class="user-view">
 <% if(author.image_url) { %>
-  <div><img src="<%= author.image_url %>"/><%= author.name %></div>
+  <img src="<%= author.image_url %>" class="avatar"/>
+<% }else{ %>
+  <img src="<%= author.gravatar_url %>" class="avatar"/>
 <% } %>
+<a href="/users/<%= author_id%>"><%= author.name %></a></div>
 <div><abbr class="timeago" title="<%= created_at %>"></abbr></div>
 <div><%= likes %> likes</div>
+<div class="button_to">
+  <% if(is_liked){ %>
+    <button class="like-button">like</button>
+  <% } %>
+  <% if(is_cooking) { %>
+    <button class="cook-button">cook</button>
+  <% } %>
+</div>

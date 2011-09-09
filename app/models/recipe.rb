@@ -29,10 +29,19 @@ class Recipe < ActiveRecord::Base
 
   scope :search_for, lambda {|query| search(query) }
 
-  def tags_names 
-    tags ? tags.split() : []
+  attr_accessor :current_user
+
+  def is_liked
+    user ||= current_user
+    user.liked?(self) if user
   end
 
+  def is_cooking
+    user ||= current_user
+    user.cooking?(self) if user
+
+  end
+  
   def self.followed_by(user)
     following_ids = %(SELECT followed_id FROM relationships 
                       WHERE follower_id = :user_id)

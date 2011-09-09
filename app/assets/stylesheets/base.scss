@@ -47,7 +47,8 @@ footer{
     float:left;
   }
 }
-.button_to input{
+
+.button_to button,_to,.button_to input{
   border-radius: 5px;
   background: -webkit-gradient(linear,0% 0,0% 100%, from(#fff),to(#e1e1e1));
   height:26px;
@@ -60,4 +61,9 @@ footer{
   &:active{
     background: gray;
   }
+}
+
+.user-view img.avatar{
+  width:40px;
+  height:40px
 }
