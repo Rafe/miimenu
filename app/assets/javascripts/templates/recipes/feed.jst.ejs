@@ -22,12 +22,17 @@
 <% } %>
 <a href="/users/<%= author_id%>"><%= author.name %></a></div>
 <div><abbr class="timeago" title="<%= created_at %>"></abbr></div>
-<div><%= likes %> likes</div>
+<div><span class="like-count"><%= likes %></span> likes</div>
 <div class="button_to">
-  <% if(is_liked){ %>
+  <% if(!is_liked){ %>
     <button class="like-button">like</button>
+  <% }else {%>
+    <span>you like this</span>
   <% } %>
-  <% if(is_cooking) { %>
+  <br />
+  <% if(!is_cooking) { %>
     <button class="cook-button">cook</button>
+  <% }else {%>
+    <span>you are cooking this</span>
   <% } %>
 </div>

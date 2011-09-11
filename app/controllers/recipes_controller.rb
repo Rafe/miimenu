@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
     )
     respond_to do |format|
       format.html
-      format.json {render json: @recipes}
+      format.js {render json: @recipes_response}
     end
   end
 
@@ -60,9 +60,12 @@ class RecipesController < ApplicationController
   def like
     @recipe = Recipe.find(params[:id])
     current_user.like!(@recipe)
-    redirect_to request.referer
+    respond_to do |format|
+      format.js { render json: {status: "success", likes: @recipe.likes } }
+    end
   end
 
+  #depreciates
   def cook 
     @recipe = Recipe.find(params[:id])
     current_user.cook!(@recipe)

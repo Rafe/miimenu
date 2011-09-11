@@ -1,16 +1,18 @@
 <%= render "menus/menu" %>
 
-<div class="recipes">
+<div id="recipes-view"class="recipes">
   <%= render partial: "shared/action_bar", locals: {action: :index }%>
-  <div id="recipes-view" class="recipe-type clearfix"> 
+  <div class="recipe-area clearfix"> 
     <%= link_to "News", "?tab=news",:title => "Recipes from your friends and people you followed" %>|
     <%= link_to "All", "?tab=all",:title => "All recipes"%>
+  </div>
+  <button id="more-button">More</button>
 
   <script>
     $(function(){
       var app = new Miimenu.Routers.AppRouter();
       app.menuModel.reset(<%= raw(current_user.to_make.to_json) %>);
-      app.feedModel.reset(<%= raw(@recipes_response) %>)
+      app.feedsModel.reset(<%= raw(@recipes_response) %>)
     });
   </script>
 </div>

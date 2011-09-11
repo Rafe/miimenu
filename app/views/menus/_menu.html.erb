@@ -1,8 +1,8 @@
 <% if current_user %>
-  <div id="menu" class="menu">
+  <div class="menu">
     <%= render :partial => "users/digest", :locals => {:user =>current_user} %>
-    <div class="to-make">
-      <h4>To Make</h4>
+    <h4>To Make</h4>
+    <div id="menu" class="to-make">
     </div>
   </div>
 <% end %>

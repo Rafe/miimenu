@@ -1,11 +1,14 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!, :except => :index
   
   def index 
     render :text => "index comment #{params['recipe_id']}"
   end
 
   def create 
-    comment = current_user.comments.new(:text => params['comment']['text'],:recipe_id => params["recipe_id"])
+    comment = current_user.comments.new(
+      :text => params['comment']['text'],
+      :recipe_id => params["recipe_id"])
     if comment.valid?
       comment.save!
     else

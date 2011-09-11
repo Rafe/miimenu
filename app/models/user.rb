@@ -69,8 +69,8 @@ class User < ActiveRecord::Base
     entries.create(:recipe => recipe, :menu => menu)
   end
 
-  def like!(recipe)
-    activities.create(:target => recipe,:action =>:like)
+  def like!(resource)
+    activities.create(:target => resource,:action =>:like)
   end
   
   def gravatar_url
@@ -78,6 +78,7 @@ class User < ActiveRecord::Base
     image_url = "http://gravatar.com/avatar/#{gravatar_id}"
   end
   
+  #check for sample website to put it as a common method
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     #1.find authentications exist, => true, sync and return user, false => user? build auth, build user with auth
     user_info = access_token['user_info']

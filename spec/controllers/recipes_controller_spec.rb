@@ -53,10 +53,13 @@ describe RecipesController do
 
   describe "GET 'like'" do
 
-    it "should increase the recipe count" do
-      @user.stub!(:like!).with(@recipe)
-      get :like, :id => @recipe.id
-      response.should redirect_to root_path
+    it "should increase the recipe likes count" do
+      lambda do
+        xhr :get, :like, :id => @recipe.id
+        response.should be_success
+        response.body.should == { status:"success", likes:1 }.to_json
+      end.should change(@recipe,:likes).by(1)
+      assigns[:recipe].should == @recipe
     end
   end
 
