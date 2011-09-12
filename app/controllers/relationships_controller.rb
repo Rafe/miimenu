@@ -5,7 +5,7 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:relationship][:followed_id])
-    current_user.follow!(@user)
+    current_user.follow!(@user.id)
     respond_with @user
   end
 
@@ -14,5 +14,4 @@ class RelationshipsController < ApplicationController
     current_user.unfollow!(@user)
     respond_with @user
   end
-
 end

@@ -1,0 +1,13 @@
+<div class="photo">
+  <% if(image_url) { %>
+    <img src="<%= image_url %>" class="avatar"/>
+  <% }else{ %>
+    <img src="<%= gravatar_url %>" class="avatar"/>
+  <% } %>
+</div>
+<div class="content">
+  <a href="/users/<%= id %>"><%= name %></a>
+  <%= followers_count %> following,
+  <%= recipes_count %> recipes
+  <div class="follow-area"></div>
+</div>

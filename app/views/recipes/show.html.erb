@@ -6,7 +6,7 @@
   <script>
     $(function(){
       var app = new Miimenu.Routers.AppRouter();
-      app.menuModel.reset(<%= raw(current_user.to_make.to_json) %>)
+      app.menuModel.reset(<%= raw(@entries_response) %>)
     });
   </script>
 </div>

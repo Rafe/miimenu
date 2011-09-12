@@ -5,14 +5,15 @@ class RecipesController < ApplicationController
     if params[:tab] == "all"
       @recipes = Recipe.includes(:ingredients).page(params[:page]).per(10)
     else
-      @recipes = current_user.feed.includes(:ingredients).page(params[:page]).per(10)
+      @recipes = current_user.feed.includes(:ingredients,:author).page(params[:page]).per(10)
     end
     @recipes.each {|r| r.current_user = current_user }
     @recipes_response = @recipes.to_json(
-      :include =>{ :author => { :methods => [:gravatar_url] },
+      :include =>{ :author => { :methods => [:id,:gravatar_url,:followers_count,:recipes_count] },
                    :ingredients => {} },
-      :methods => [:medium_image,:likes,:is_liked,:is_cooking]
+      :methods => [:thumb_image,:medium_image,:likes,:is_liked,:is_cooking]
     )
+    @entries_response = current_user.to_make_in_json
     respond_to do |format|
       format.html
       format.js {render json: @recipes_response}
@@ -20,6 +21,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @entries_response = current_user.to_make_in_json
     @recipe = Recipe.find(params[:id])
   end
 

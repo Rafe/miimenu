@@ -31,9 +31,18 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :image_url
+  attr_accessor :current_user
+
+  def is_followed 
+    current_user.following?(self) ? true : false
+  end
 
   def to_make
     menus.where("entries.menu = 'To make'")
+  end
+
+  def to_make_in_json
+    to_make.to_json( methods: :thumb_image )
   end
 
   def menu_names
@@ -57,11 +66,13 @@ class User < ActiveRecord::Base
   end
 
   def follow!(followed)
-    relationships.create!(:followed_id => followed.id)
+    relationships.create(:followed_id => followed) unless followed == id
   end
 
   def unfollow!(followed)
-    relationships.find_by_followed_id(followed).destroy
+    follow = relationships.find_by_followed_id(followed) 
+    follow.destroy if follow
+    false
   end
 
   def cook!(recipe,menu="To make")
@@ -76,6 +87,14 @@ class User < ActiveRecord::Base
   def gravatar_url
     gravatar_id = Digest::MD5.hexdigest(email.downcase)
     image_url = "http://gravatar.com/avatar/#{gravatar_id}"
+  end
+
+  def followers_count
+    followers.count
+  end
+
+  def recipes_count
+    recipes.count
   end
   
   #check for sample website to put it as a common method

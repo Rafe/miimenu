@@ -1,4 +1,5 @@
 Miimenu.Models.Recipe = Backbone.Model.extend({
+  urlRoot:"/recipes"
 
   initialize:()->
     _.bindAll(@,"like","cook")
@@ -6,7 +7,6 @@ Miimenu.Models.Recipe = Backbone.Model.extend({
   cook:(options)->
     entry = new Miimenu.Models.Entry()
     entry.save({
-      url:"/entries"
       recipe_id : @id
     },{
       success:(model,resp)->

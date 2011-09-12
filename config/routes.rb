@@ -6,7 +6,12 @@ Miimenu::Application.routes.draw do
 
   root :to => "recipes#index"
 
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show] do 
+    member do 
+      post 'follow'
+      post 'unfollow'
+    end
+  end
 
   resources :recipes do
     resources :comments, :only => [:index,:create,:destroy]

@@ -10,6 +10,8 @@ Miimenu.Views.FeedView = Backbone.View.extend({
 
   render: ()->
     $(@el).html(@template(@model.toJSON()))
+    @author = new Miimenu.Views.AuthorView(@model.get("author"))
+    @$(".author-view").html(@author.render().el)
     @$("abbr.timeago").timeago()
     this
 

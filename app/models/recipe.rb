@@ -39,7 +39,6 @@ class Recipe < ActiveRecord::Base
   def is_cooking
     user ||= current_user
     user.cooking?(self) if user
-
   end
   
   def self.followed_by(user)
@@ -60,6 +59,10 @@ class Recipe < ActiveRecord::Base
 
   def medium_image
     image.url(:medium)
+  end
+
+  def thumb_image
+    image.url(:thumb)
   end
 end
 

@@ -2,6 +2,7 @@ Miimenu.Views.FeedsView = Backbone.View.extend({
   className : "recipes clearfix"
   tagName : "div"
   el : "#recipes-view"
+  pageRange:10
 
   events:
     "click #more-button":"more"
@@ -21,7 +22,11 @@ Miimenu.Views.FeedsView = Backbone.View.extend({
     @$(".recipe-area").append(view.render().el)
 
   more : ()->
-    @feeds.more()
+    view = @
+    @feeds.more(
+      end:()->
+        view.$("#more-button").hide()
+    )
 
   refresh :(model)->
     feed = @feeds.get(model.id)

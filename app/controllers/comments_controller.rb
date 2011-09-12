@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
   before_filter :authenticate_user!, :except => :index
   
   def index 
-    render :text => "index comment #{params['recipe_id']}"
+    comments = Comment.where(:recipe_id => params[:recipe_id])
+    render json: comments.to_json
   end
 
   def create 

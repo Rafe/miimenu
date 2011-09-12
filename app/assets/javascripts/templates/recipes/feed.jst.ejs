@@ -10,17 +10,12 @@
 </h3>
 <p><%= description %></p>
 <div>
-  <% _.each(ingredients,function(i){ %>
-    <span><%= i.name %></span> ,
-  <% }); %>  
+<%= _.map(ingredients,function(i){ return "<span>" + i.name + "</span>";}).join(", ") %>  
 </div>
-<div class="user-view">
-<% if(author.image_url) { %>
-  <img src="<%= author.image_url %>" class="avatar"/>
-<% }else{ %>
-  <img src="<%= author.gravatar_url %>" class="avatar"/>
-<% } %>
-<a href="/users/<%= author_id%>"><%= author.name %></a></div>
+
+<div class="author-view">
+</div>
+
 <div><abbr class="timeago" title="<%= created_at %>"></abbr></div>
 <div><span class="like-count"><%= likes %></span> likes</div>
 <div class="button_to">
@@ -29,7 +24,6 @@
   <% }else {%>
     <span>you like this</span>
   <% } %>
-  <br />
   <% if(!is_cooking) { %>
     <button class="cook-button">cook</button>
   <% }else {%>

@@ -165,7 +165,7 @@ describe User do
       end
 
       it "should be able to create relationship with followed user" do
-        @user.follow! @user2
+        @user.follow! @user2.id
         @user.following.should include(@user2)
       end
     end

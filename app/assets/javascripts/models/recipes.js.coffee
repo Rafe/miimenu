@@ -6,10 +6,13 @@ Miimenu.Models.Recipes = Backbone.Collection.extend({
     @page = 2
     _.bindAll(@,"more")
 
-  more: ()->
+  more: (options)->
+    length = @models.length
     @fetch(
       data: {page:@page,tab:$.urlParam('tab')}
       add:true
+      success:(models)->
+        options.end() if length is models.length
     )
     @page += 1
 })
