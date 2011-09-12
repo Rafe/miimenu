@@ -1,4 +1,4 @@
-Miimenu.Views.AuthorView = Backbone.View.extend({
+class Miimenu.Views.AuthorView extends Backbone.View
   template : JST["templates/users/author"]
   className: "user-view"
 
@@ -42,7 +42,6 @@ Miimenu.Views.AuthorView = Backbone.View.extend({
     view = @
     @model.follow(
       success:(data)->
-        console.log data
         view.setFollowButton()
     )
 
@@ -50,7 +49,6 @@ Miimenu.Views.AuthorView = Backbone.View.extend({
     view = @
     @model.unfollow(
       success:(data)->
-        console.log data
         view.setFollowButton()
     )
-})
+

@@ -1,4 +1,4 @@
-Miimenu.Views.FeedView = Backbone.View.extend({
+class Miimenu.Views.FeedView extends Backbone.View
   className: "feed clearfix"
   tagName: "div"
   
@@ -34,4 +34,3 @@ Miimenu.Views.FeedView = Backbone.View.extend({
         view.model.set(model)
         menu.add(model)
     })
-})

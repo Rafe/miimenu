@@ -1,4 +1,4 @@
-Miimenu.Models.User = Backbone.Model.extend({
+class Miimenu.Models.User extends Backbone.Model
   urlRoot:"/users"
 
   initialize:()->
@@ -26,4 +26,3 @@ Miimenu.Models.User = Backbone.Model.extend({
     }).error((xhr,status,errorThrown)->
       console.log("#{xhr},{#status},#{errorThrown}")
     )
-})

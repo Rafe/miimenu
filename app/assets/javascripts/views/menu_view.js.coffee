@@ -1,4 +1,4 @@
-Miimenu.Views.MenuView = Backbone.View.extend({
+class Miimenu.Views.MenuView extends Backbone.View
   el:'#menu'
 
   initialize : (models,feedsView)->
@@ -18,4 +18,3 @@ Miimenu.Views.MenuView = Backbone.View.extend({
     view = new Miimenu.Views.EntryView({model:model})
     $(@el).prepend(view.render().el)
 
-})

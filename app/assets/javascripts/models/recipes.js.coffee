@@ -1,4 +1,4 @@
-Miimenu.Models.Recipes = Backbone.Collection.extend({
+class Miimenu.Models.Recipes extends Backbone.Collection
   model: Miimenu.Models.Recipe
   url:"/recipes"
 
@@ -15,4 +15,3 @@ Miimenu.Models.Recipes = Backbone.Collection.extend({
         options.end() if length is models.length
     )
     @page += 1
-})

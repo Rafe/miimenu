@@ -1,4 +1,4 @@
-Miimenu.Views.FeedsView = Backbone.View.extend({
+class Miimenu.Views.FeedsView extends Backbone.View
   className : "recipes clearfix"
   tagName : "div"
   el : "#recipes-view"
@@ -32,4 +32,3 @@ Miimenu.Views.FeedsView = Backbone.View.extend({
     feed = @feeds.get(model.id)
     feed.set({is_cooking:false}) if feed?
 
-})

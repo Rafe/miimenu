@@ -1,4 +1,4 @@
-Miimenu.Views.EntryView = Backbone.View.extend({
+class Miimenu.Views.EntryView extends Backbone.View
   className:"entry clearfix"
 
   template:JST["templates/recipes/entry"]
@@ -17,4 +17,3 @@ Miimenu.Views.EntryView = Backbone.View.extend({
     @model.destroy()
     this.remove()
     false
-})

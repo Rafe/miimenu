@@ -1,4 +1,4 @@
-Miimenu.Models.Recipe = Backbone.Model.extend({
+class Miimenu.Models.Recipe extends Backbone.Model
   urlRoot:"/recipes"
 
   initialize:()->
@@ -26,4 +26,3 @@ Miimenu.Models.Recipe = Backbone.Model.extend({
     ).error((xhr,status,errorThrown)->
       console.log("#{xhr},{#status},#{errorThrown}")
     )
-})

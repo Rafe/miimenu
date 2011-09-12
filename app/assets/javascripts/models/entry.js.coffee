@@ -1,8 +1,6 @@
-Miimenu.Models.Entry = Backbone.Model.extend({
+class Miimenu.Models.Entry extends Backbone.Model
   urlRoot:"/entries"
-})
 
-Miimenu.Models.Entries = Backbone.Collection.extend({
+class Miimenu.Models.Entries extends Backbone.Collection
   model: Miimenu.Models.Entry
   url: "/entries"
-})
