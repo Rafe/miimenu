@@ -31,6 +31,13 @@ class Recipe < ActiveRecord::Base
 
   attr_accessor :current_user
 
+  def as_json(options = nil)
+    super( :include => {:author => 
+          {:methods => [:id,:gravatar_url,:followers_count,:recipes_count] }, 
+           :ingredients => {} },
+           :methods =>[:thumb_image,:medium_image, :likes,:is_liked,:is_cooking])
+  end
+
   def is_liked
     user ||= current_user
     user.liked?(self) if user

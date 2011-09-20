@@ -18,7 +18,6 @@ class CommentsController < ApplicationController
     redirect_to recipe_path(params["recipe_id"])
   end
 
-  #should check user authentication
   def destroy 
     comment = Comment.find(params[:id])
     comment.destroy if comment && comment.commenter.id == current_user.id

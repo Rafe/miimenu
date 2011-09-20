@@ -1,0 +1,11 @@
+<div class="photo">
+  <% if(image_url) { %>
+    <img src="<%= image_url %>" class="user-photo"/>
+  <% }else{ %>
+    <img src="<%= gravatar_url %>" class="user-photo"/>
+  <% } %>
+</div>
+<%= name %> <br />
+<%= $.pluralize(followers_count,"follower") %><br />
+<%= $.pluralize(recipes_count,"recipe") %><br />
+<div class="follow-area"></div>

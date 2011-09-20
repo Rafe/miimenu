@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @recipes = @user.recipes.page(params[:page]).per(10) 
     respond_to do |format|
       format.html
-      format.js { render json: @user.to_json( methods: [:id,:is_followed]) }
+      format.js { render json: @user }
     end
   end
 

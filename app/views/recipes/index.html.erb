@@ -1,7 +1,6 @@
 <%= render "menus/menu" %>
 
 <div id="recipes-view"class="recipes">
-  <%= render partial: "shared/action_bar", locals: {action: :index }%>
   <div class="recipe-area clearfix"> 
     <%= link_to "News", "?tab=news",:title => "Recipes from your friends and people you followed" %>|
     <%= link_to "All", "?tab=all",:title => "All recipes"%>

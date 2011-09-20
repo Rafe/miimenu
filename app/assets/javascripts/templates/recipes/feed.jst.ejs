@@ -2,31 +2,44 @@
   <a href="recipes/<%= id %>" title="<%= name %>">
     <img src="<%= medium_image %>" width="200" height="160"/></a>
 </div>
+<div class="content">
+  <h3>
+    <a href="recipes/<%= id %>" title="<%= name %>">
+      <%= name %>
+    </a>
+  </h3>
+  <div class="description">
+  <p><%= description %></p>
+  </div>
+  <div class="ingredients">
+  <%= _.map(ingredients,function(i){ return "<span>" + i.name + "</span>";}).join(", ") %>  
+  </div>
+  <div><span class="like-count"><%= likes %></span> likes</div>
+  <div class="author-view">
+    <div class="photo">
+      <% if(author.image_url) { %>
+        <img src="<%= author.image_url %>" class="avatar"/>
+      <% }else{ %>
+        <img src="<%= author.gravatar_url %>" class="avatar"/>
+      <% } %>
+    </div>
+    <div class="content">
+      Posted by <a href="/users/<%= author.id %>"><%= author.name %></a> 
+      <div><abbr class="timeago" title="<%= created_at %>"></abbr></div>
+    </div>
+    <div class="overlay"></div>
+  </div>
 
-<h3>
-  <a href="recipes/<%= id %>" title="<%= name %>">
-    <%= name %>
-  </a>
-</h3>
-<p><%= description %></p>
-<div>
-<%= _.map(ingredients,function(i){ return "<span>" + i.name + "</span>";}).join(", ") %>  
-</div>
-
-<div class="author-view">
-</div>
-
-<div><abbr class="timeago" title="<%= created_at %>"></abbr></div>
-<div><span class="like-count"><%= likes %></span> likes</div>
-<div class="button_to">
-  <% if(!is_liked){ %>
-    <button class="like-button">like</button>
-  <% }else {%>
-    <span>you like this</span>
-  <% } %>
-  <% if(!is_cooking) { %>
-    <button class="cook-button">cook</button>
-  <% }else {%>
-    <span>you are cooking this</span>
-  <% } %>
+  <div class="button_to">
+    <% if(!is_liked){ %>
+      <button class="like-button">like</button>
+    <% }else {%>
+      <span>you like this</span>
+    <% } %>
+    <% if(!is_cooking) { %>
+      <button class="cook-button">cook</button>
+    <% }else {%>
+      <span>you are cooking this</span>
+    <% } %>
+  </div>
 </div>

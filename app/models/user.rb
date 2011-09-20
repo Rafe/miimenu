@@ -33,8 +33,16 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :image_url
   attr_accessor :current_user
 
+  def as_json(options = {})
+    super(:methods => [:id,:is_followed,:is_you,:gravatar_url,:followers_count,:recipes_count])
+  end
+
   def is_followed 
-    current_user.following?(self) ? true : false
+    current_user.following?(self) ? true : false if current_user
+  end
+
+  def is_you
+    current_user == self if current_user
   end
 
   def to_make
@@ -72,7 +80,7 @@ class User < ActiveRecord::Base
   def unfollow!(followed)
     follow = relationships.find_by_followed_id(followed) 
     follow.destroy if follow
-    false
+    true
   end
 
   def cook!(recipe,menu="To make")

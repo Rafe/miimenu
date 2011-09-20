@@ -2,11 +2,13 @@
   <div class="content">
     <h1 class="logo"><%= link_to "Miimenu",root_path%></h1>    
     <%= form_tag(search_recipes_path , :method => "get" , :class => "search-form") do %>
-      <% text_field_tag :q, "",:class => "search-bar" , :placeholder => "Search" %>
+      <% text_field_tag :q, "",:class => "search-bar" , 
+        :placeholder => "Recipes or Ingredients" %>
     <% end %>
     <% if user_signed_in? %>
     <% end %>
     <nav> 
+      <%= link_to "Create", new_recipe_path %> | 
       <%= link_to "Home", root_path %> | 
       <%= link_to_twitter("Tw") %> | 
       <%= link_to_facebook("Fb") %> | 

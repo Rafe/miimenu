@@ -2,11 +2,11 @@
   <%= gravatar_for user, :size => 40 %>
   <div class="content">
     <h5><%= link_to user.name,user_path(user) %></h5>
-    <span>
-      <%= user.followers.count %> followers
-    </span>
-    <span>
-      <%= user.recipes.count %> recipes
-    </span>
+    <div>
+      <%= pluralize(user.followers.count,"follower") %>
+    </div>
+    <div>
+      <%= pluralize(user.recipes.count,"recipe") %>
+    </div>
   </div>
 </div>

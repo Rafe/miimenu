@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_filter :authenticate_user!, :except => :show
+  before_filter :authenticate_user!
 
   def index
     if params[:tab] == "all"
@@ -8,12 +8,8 @@ class RecipesController < ApplicationController
       @recipes = current_user.feed.includes(:ingredients,:author).page(params[:page]).per(10)
     end
     @recipes.each {|r| r.current_user = current_user }
-    @recipes_response = @recipes.to_json(
-      :include =>{ :author => { :methods => [:id,:gravatar_url,:followers_count,:recipes_count] },
-                   :ingredients => {} },
-      :methods => [:thumb_image,:medium_image,:likes,:is_liked,:is_cooking]
-    )
     @entries_response = current_user.to_make_in_json
+    @recipes_response = ActiveSupport::JSON.encode(@recipes)
     respond_to do |format|
       format.html
       format.js {render json: @recipes_response}
@@ -21,7 +17,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @entries_response = current_user.to_make_in_json
+    @entries_response = current_user.to_make_in_json if current_user
     @recipe = Recipe.find(params[:id])
   end
 

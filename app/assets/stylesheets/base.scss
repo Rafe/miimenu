@@ -1,7 +1,7 @@
 @import 'compass/reset';
 
-h1{font-size:36px;}
-h2{font-size:28px;}
+h1{font-size:28px;}
+h2{font-size:24px;}
 h3{font-size:20px;}
 h4{font-size:18px;}
 h1,h2,h3,h4,h5,h6{
@@ -17,11 +17,9 @@ body{
   line-height:1.2;
 }
 
-.container{
-  width:1000px;
-  margin:0 auto;
-  margin-buttom: 10px;
-  border:1px #ffeedd solid;
+footer{
+  margin: 0 auto;
+  text-align: center;
 }
 
 .clearfix{
@@ -33,37 +31,4 @@ body{
     height:0;
     zoom:1;
   }
-}
-
-footer{
-  margin: 0 auto;
-  text-align: center;
-}
-
-.actions{
-  height:18px;
-  padding:5px;
-  div{
-    float:left;
-  }
-}
-
-.button_to button,_to,.button_to input{
-  border-radius: 5px;
-  background: -webkit-gradient(linear,0% 0,0% 100%, from(#fff),to(#e1e1e1));
-  height:26px;
-  margin:5px;
-  font-size:14px;
-  padding:0 7px;
-  &:hover{
-    background: #EEE;
-  }
-  &:active{
-    background: gray;
-  }
-}
-
-.user-view img.avatar{
-  width:40px;
-  height:40px
 }
